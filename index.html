@@ -20,7 +20,7 @@
             line-height: 1.7;
         }
 
-        /* Container: Padding atas kecil agar konten naik */
+        /* Container: Jarak atas kecil agar nama naik */
         .container {
             max-width: 650px;
             margin: 0 auto;
@@ -31,10 +31,10 @@
             margin-bottom: 20px;
         }
 
-        /* Navigasi: Ikon Strip 3 di Kiri */
+        /* Navigasi: Pindah ke pojok KANAN */
         nav {
             display: flex;
-            justify-content: flex-start;
+            justify-content: flex-end; /* Menggeser ikon ke kanan */
             align-items: center;
             position: relative;
             margin-bottom: 10px;
@@ -50,13 +50,14 @@
 
         #menu-toggle { display: none; }
 
-        /* Menu Dropdown */
+        /* Menu Dropdown: Muncul dari KANAN */
         .menu {
             display: none;
             flex-direction: column;
             position: absolute;
             top: 40px;
-            left: 0;
+            right: 0; /* Menempel di sisi kanan */
+            left: auto; /* Mematikan setting kiri sebelumnya */
             width: 200px;
             background: white;
             padding: 20px;
@@ -80,17 +81,17 @@
 
         .menu a:hover { color: #111827; }
 
-        /* Judul: Mepet ke atas, beri jarak ke bio */
+        /* Judul: Tetap di tengah, jarak ke bio pas */
         h1 {
             font-size: 32px;
             font-weight: 700;
             margin-top: 0;
-            margin-bottom: 40px; /* Jarak agar tidak terlalu rapat dengan bio */
+            margin-bottom: 40px;
             text-align: center;
             letter-spacing: -0.02em;
         }
 
-        /* Bio: Teks Rapi */
+        /* Bio */
         .bio {
             font-size: 16px;
             color: #4b5563;

@@ -6,140 +6,114 @@
     <title>Ahmad Zulpiqor</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #ffffff;
-            --text: #111827;
-            --gray: #6b7280;
+        /* 1. Reset Total agar Ahmad Zulpiqor naik ke atas */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Inter', -apple-system, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
+            background-color: #ffffff;
+            color: #111827;
             line-height: 1.7;
         }
 
+        /* 2. Container: Jarak atas dibuat sangat tipis (10px) */
         .container {
             max-width: 650px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 10px 20px; 
         }
 
-        /* Navigasi Modern ala Saugi */
         header {
-            margin-bottom: 48px;
-            padding-top: 20px;
+            margin-bottom: 20px;
         }
 
+        /* 3. Nav: Paksa Strip 3 ke pojok KIRI */
         nav {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start !important; 
             align-items: center;
             position: relative;
-            margin-bottom: 40px;
+            margin-bottom: 5px;
         }
 
-        .logo {
-            font-size: 18px;
-            font-weight: 700;
-            font-style: italic;
+        /* 4. Strip 3 (Hamburger): Selalu muncul di Laptop & HP */
+        .hamburger {
+            display: block !important; 
+            font-size: 26px;
+            cursor: pointer;
+            color: #111827;
+            padding: 5px 0;
         }
 
+        #menu-toggle { display: none; }
+
+        /* 5. Menu Dropdown ala Saugi */
         .menu {
-            display: flex;
-            gap: 20px;
+            display: none; 
+            flex-direction: column;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 180px;
+            background: white;
+            padding: 15px;
+            border: 1px solid #f3f4f6;
+            z-index: 100;
             list-style: none;
-            margin: 0;
-            padding: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
+        /* Muncul saat Strip 3 diklik */
+        #menu-toggle:checked ~ .menu {
+            display: flex;
+        }
+
+        .menu li { margin-bottom: 10px; }
         .menu a {
             text-decoration: none;
-            color: var(--gray);
-            transition: color 0.2s;
+            color: #6b7280;
             font-size: 16px;
+            display: block;
         }
 
-        .menu a:hover {
-            color: var(--text);
-        }
+        .menu a:hover { color: #111827; }
 
-        /* Mekanisme Strip 3 (Hamburger) */
-        #menu-toggle {
-            display: none;
-        }
-
-        .hamburger {
-            display: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--text);
-        }
-
+        /* 6. Judul: Dibuat sangat mepet ke Navigasi */
         h1 {
             font-size: 32px;
             font-weight: 700;
-            margin: 0 0 24px 0;
-            letter-spacing: -0.02em;
+            margin-top: 0 !important;
+            margin-bottom: 24px;
             text-align: center;
+            letter-spacing: -0.02em;
         }
 
         .bio {
             font-size: 16px;
-            color: var(--gray);
-            text-align: justify; /* Supaya teks lurus kanan-kiri */
+            color: #6b7280;
+            text-align: justify;
             text-justify: inter-word;
         }
 
-        .bio p {
-            margin-bottom: 20px;
-        }
-
-        .highlight {
-            color: var(--text);
-            font-weight: 500;
-        }
+        .bio p { margin-bottom: 20px; }
+        .highlight { color: #111827; font-weight: 500; }
 
         footer {
-            margin-top: 80px;
+            margin-top: 60px;
             padding-top: 20px;
             border-top: 1px solid #f3f4f6;
             font-size: 13px;
-            color: var(--gray);
+            color: #6b7280;
             text-align: center;
         }
 
-        /* Responsif untuk HP */
-        @media (max-width: 768px) {
-            nav {
-                padding: 10px 0;
-            }
-
-            .hamburger {
-                display: block; /* Munculkan Strip 3 di HP */
-            }
-
-            .menu {
-                display: none; /* Sembunyikan menu teks */
-                flex-direction: column;
-                position: absolute;
-                top: 50px;
-                left: 0;
-                width: 100%;
-                background: white;
-                padding: 20px;
-                border: 1px solid #f3f4f6;
-                z-index: 100;
-                gap: 15px;
-            }
-
-            /* Logika: Jika strip 3 diklik, menu muncul */
-            #menu-toggle:checked ~ .menu {
-                display: flex;
-            }
-
+        @media (max-width: 480px) {
             h1 { font-size: 28px; }
+            .container { padding-top: 10px; }
         }
     </style>
 </head>
@@ -147,7 +121,6 @@
     <div class="container">
         <header>
             <nav>
-                
                 <input type="checkbox" id="menu-toggle">
                 <label for="menu-toggle" class="hamburger">&#9776;</label>
 

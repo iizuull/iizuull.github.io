@@ -1,35 +1,79 @@
+/* style.css */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #f3f4f6;
-  color: #333;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #fff; /* Background putih bersih khas Saugi */
+  color: #222;
   margin: 0;
+  line-height: 1.8; /* Memberi spasi antar baris agar teks tidak rapat */
 }
 
 .container {
-  max-width: 700px;
-  margin: 60px auto;
-  padding: 20px;
+  max-width: 720px;
+  margin: 80px auto;
+  padding: 0 20px;
 }
 
+/* Judul Utama */
 h1 {
-  font-size: 40px;
-  margin-bottom: 5px;
+  font-size: 22px;
+  font-weight: 600;
+  font-style: italic;
+  margin-bottom: 50px;
 }
 
-.subtitle {
-  color: #777;
-  margin-bottom: 40px;
-}
-
+/* List Catatan Harian */
 .post {
-  background: white;
-  padding: 25px;
-  margin-bottom: 25px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 35px;
+  background: none; /* Hapus background putih */
+  padding: 0; /* Hapus padding kotak */
+  box-shadow: none; /* Hapus bayangan */
+  border-radius: 0;
 }
 
+.lang-label {
+  font-size: 13px;
+  color: #ccc;
+  min-width: 45px;
+  padding-top: 5px;
+  font-weight: 500;
+}
+
+.post-content h2 {
+  font-size: 19px;
+  font-weight: 500;
+  margin: 0 0 5px 0;
+}
+
+.post-content h2 a {
+  text-decoration: none;
+  color: #222;
+}
+
+.post-content h2 a:hover {
+  text-decoration: underline;
+}
+
+/* Meta Data (Tanggal & Kategori) */
 .date {
   font-size: 14px;
   color: #999;
+}
+
+.category {
+  color: #4f46e5;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+/* Styling untuk isi artikel (di dalam posts/...) */
+p {
+  margin-bottom: 25px;
+}
+
+h2.article-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }

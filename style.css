@@ -77,3 +77,36 @@ h2.article-title {
   font-weight: 700;
   margin-bottom: 10px;
 }
+/* Variabel Warna */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #222222;
+  --gray-color: #666666;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --gray-color: #aaaaaa;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Tombol Lampu */
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 18px;
+  color: var(--gray-color);
+  transition: color 0.2s;
+}
+
+.theme-toggle:hover {
+  color: var(--text-color);
+}

@@ -1,99 +1,41 @@
-/* style.css */
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #fff; /* Background putih bersih khas Saugi */
-  color: #222;
-  margin: 0;
-  line-height: 1.8; /* Memberi spasi antar baris agar teks tidak rapat */
-}
-
-.container {
-  max-width: 720px;
-  margin: 80px auto;
-  padding: 0 20px;
-}
-
-/* Judul Utama */
-h1 {
-  font-size: 22px;
-  font-weight: 600;
-  font-style: italic;
-  margin-bottom: 50px;
-}
-
-/* List Catatan Harian */
-.post {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 35px;
-  background: none; /* Hapus background putih */
-  padding: 0; /* Hapus padding kotak */
-  box-shadow: none; /* Hapus bayangan */
-  border-radius: 0;
-}
-
-.lang-label {
-  font-size: 13px;
-  color: #ccc;
-  min-width: 45px;
-  padding-top: 5px;
-  font-weight: 500;
-}
-
-.post-content h2 {
-  font-size: 19px;
-  font-weight: 500;
-  margin: 0 0 5px 0;
-}
-
-.post-content h2 a {
-  text-decoration: none;
-  color: #222;
-}
-
-.post-content h2 a:hover {
-  text-decoration: underline;
-}
-
-/* Meta Data (Tanggal & Kategori) */
-.date {
-  font-size: 14px;
-  color: #999;
-}
-
-.category {
-  color: #4f46e5;
-  text-decoration: none;
-  margin-left: 5px;
-}
-
-/* Styling untuk isi artikel (di dalam posts/...) */
-p {
-  margin-bottom: 25px;
-}
-
-h2.article-title {
-  font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-/* Variabel Warna */
+/* Definisi Warna */
 :root {
   --bg-color: #ffffff;
-  --text-color: #222222;
-  --gray-color: #666666;
+  --text-color: #111827;
+  --gray-color: #6b7280;
 }
 
 [data-theme="dark"] {
   --bg-color: #121212;
-  --text-color: #e0e0e0;
-  --gray-color: #aaaaaa;
+  --text-color: #f3f4f6;
+  --gray-color: #9ca3af;
 }
 
+/* Reset Dasar */
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
+  font-family: 'Inter', -apple-system, sans-serif;
+  margin: 0;
   transition: background-color 0.3s, color 0.3s;
+  line-height: 1.7;
+}
+
+/* Navigasi */
+nav {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--gray-color);
+}
+
+nav a:hover {
+  color: var(--text-color);
 }
 
 /* Tombol Lampu */
@@ -101,59 +43,30 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
-  font-size: 18px;
-  color: var(--gray-color);
-  transition: color 0.2s;
-}
-
-.theme-toggle:hover {
-  color: var(--text-color);
-}
-:root {
-  --bg-color: #ffffff;
-  --text-color: #111827;
-  --gray-color: #6b7280;
-}
-
-/* Kunci utama Dark Mode */
-[data-theme="dark"] {
-  --bg-color: #121212;
-  --text-color: #f3f4f6;
-  --gray-color: #9ca3af;
-}
-
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  line-height: 1.7;
-}
-
-/* Pastikan semua link ikut berubah warna teksnya */
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* Styling tombol lampu biar pas di navigasi */
-.theme-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
   font-size: 16px;
   color: var(--gray-color);
   margin-left: 15px;
-  padding: 0;
 }
 
-/* Pastikan elemen lain pake variabel juga */
-.bio p, footer {
-  color: var(--gray-color);
+/* Container & Bio */
+.container {
+  max-width: 650px;
+  margin: 80px auto;
+  padding: 0 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 32px;
 }
 
 .highlight {
   color: var(--text-color);
+  font-weight: 500;
+}
+
+footer {
+  color: var(--gray-color);
+  text-align: center;
+  margin-top: 80px;
 }

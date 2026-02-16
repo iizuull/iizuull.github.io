@@ -1,44 +1,100 @@
-/* Container: Kurangi padding atas agar konten naik */
-.container {
-    max-width: 650px;
-    margin: 0 auto;
-    padding: 20px 20px; /* Diubah dari 60px ke 20px agar lebih naik */
-}
+<style>
+    :root {
+        --bg: #ffffff;
+        --text: #111827;
+        --gray: #6b7280;
+    }
 
-/* Header & Nav: Hapus margin yang berlebihan */
-header {
-    margin-bottom: 20px; /* Diperkecil agar jarak nav ke H1 lebih dekat */
-}
+    body {
+        font-family: 'Inter', -apple-system, sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        margin: 0;
+        line-height: 1.7;
+    }
 
-nav {
-    display: flex;
-    justify-content: flex-start; /* Memastikan hamburger di kiri */
-    align-items: center;
-    margin-bottom: 10px;         /* Jarak minimal ke judul */
-}
+    /* 1. Kurangi padding atas dari 60px ke 20px agar Ahmad Zulpiqor naik */
+    .container {
+        max-width: 650px;
+        margin: 0 auto;
+        padding: 20px 20px; 
+    }
 
-/* Judul: Hapus margin atas sepenuhnya */
-h1 {
-    font-size: 32px;
-    font-weight: 700;
-    margin-top: 0 !important;   /* Memaksa margin atas hilang */
-    margin-bottom: 24px;
-    text-align: center;
-}
+    /* 2. Pastikan header tidak memaksa konten ke tengah */
+    header {
+        text-align: left; /* Ubah dari center ke left */
+        margin-bottom: 20px;
+    }
 
-/* Dropdown Menu HP agar tetap rapi di kiri */
-@media (max-width: 768px) {
+    /* 3. Paksa navigasi dan hamburger ke pojok kiri */
+    nav {
+        display: flex;
+        justify-content: flex-start !important; /* Paksa ke kiri */
+        align-items: center;
+        position: relative;
+        margin-bottom: 10px;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+        display: block;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--text);
+    }
+
+    #menu-toggle { display: none; }
+
     .menu {
         display: none;
         flex-direction: column;
         position: absolute;
         top: 40px;
-        left: 0;   /* Muncul dari sisi kiri sejajar hamburger */
+        left: 0;
         width: 200px;
         background: white;
         padding: 20px;
         border: 1px solid #f3f4f6;
         z-index: 100;
+        list-style: none;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-}
+
+    #menu-toggle:checked ~ .menu { display: flex; }
+
+    .menu a {
+        text-decoration: none;
+        color: var(--gray);
+        display: block;
+        padding: 5px 0;
+    }
+
+    /* 4. Nama Ahmad Zulpiqor - Hilangkan margin atas agar mepet ke nav */
+    h1 {
+        font-size: 32px;
+        font-weight: 700;
+        margin-top: 0 !important;
+        margin-bottom: 20px;
+        text-align: center; /* Tetap center jika ingin namanya di tengah */
+        letter-spacing: -0.02em;
+    }
+
+    .bio {
+        font-size: 16px;
+        color: var(--gray);
+        text-align: justify;
+        text-justify: inter-word;
+    }
+
+    .bio p { margin-bottom: 20px; }
+    .highlight { color: var(--text); font-weight: 500; }
+
+    footer {
+        margin-top: 60px;
+        padding-top: 20px;
+        border-top: 1px solid #f3f4f6;
+        font-size: 13px;
+        color: var(--gray);
+        text-align: center;
+    }
+</style>

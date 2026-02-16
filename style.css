@@ -1,72 +1,37 @@
-/* Definisi Warna */
-:root {
-  --bg-color: #ffffff;
-  --text-color: #111827;
-  --gray-color: #6b7280;
+/* Navigasi Utama */
+.main-nav {
+    display: flex;
+    gap: 25px;         /* Jarak antar menu lebih lebar */
+    justify-content: center;
+    margin-bottom: 50px;
+    align-items: center;
+    flex-wrap: wrap;   /* Biar kalau di HP sempit, dia turun rapi */
 }
 
-[data-theme="dark"] {
-  --bg-color: #121212;
-  --text-color: #f3f4f6;
-  --gray-color: #9ca3af;
+.main-nav a, .theme-toggle {
+    font-size: 18px;   /* Ukuran lebih gede biar enak diklik jempol */
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--gray-color);
+    transition: 0.2s;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
-/* Reset Dasar */
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-family: 'Inter', -apple-system, sans-serif;
-  margin: 0;
-  transition: background-color 0.3s, color 0.3s;
-  line-height: 1.7;
+.main-nav a:hover, .theme-toggle:hover {
+    color: var(--text-color);
 }
 
-/* Navigasi */
-nav {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  margin-bottom: 60px;
-}
-
-nav a {
-  text-decoration: none;
-  color: var(--gray-color);
-}
-
-nav a:hover {
-  color: var(--text-color);
-}
-
-/* Tombol Lampu */
-.theme-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  color: var(--gray-color);
-  margin-left: 15px;
-}
-
-/* Container & Bio */
-.container {
-  max-width: 650px;
-  margin: 80px auto;
-  padding: 0 20px;
-}
-
-h1 {
-  text-align: center;
-  font-size: 32px;
-}
-
-.highlight {
-  color: var(--text-color);
-  font-weight: 500;
-}
-
-footer {
-  color: var(--gray-color);
-  text-align: center;
-  margin-top: 80px;
+/* Khusus buat tampilan HP (Layar Kecil) */
+@media (max-width: 480px) {
+    .main-nav {
+        gap: 15px;     /* Jarak agak rapat dikit di HP biar muat sesampingan */
+    }
+    .main-nav a, .theme-toggle {
+        font-size: 16px; /* Ukuran pas buat layar HP */
+    }
+    h1 {
+        font-size: 28px; /* Judul nama lu gak kegedean di HP */
+    }
 }

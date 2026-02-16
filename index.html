@@ -25,35 +25,35 @@
 
         .container {
             max-width: 650px;
-            padding: 60px 20px; /* Ukuran padding disesuaikan untuk layar HP */
+            padding: 60px 20px;
             width: 100%;
         }
 
-        /* Navigasi Responsif */
         nav {
             display: flex;
             gap: 20px;
             margin-bottom: 60px;
             justify-content: center;
-            font-size: 16px; /* Ukuran dasar dinaikkan agar tidak kekecilan */
-            flex-wrap: wrap; /* Agar menu turun rapi di layar kecil */
+            font-size: 16px;
+            flex-wrap: wrap;
         }
 
         nav a {
             text-decoration: none;
             color: var(--gray);
             transition: color 0.2s;
-            padding: 5px 10px; /* Area klik lebih luas untuk jari */
+            padding: 5px 10px;
         }
 
         nav a:hover {
             color: var(--text);
         }
 
-        /* Header Profil */
         header {
             text-align: center;
             margin-bottom: 48px;
+            /* Tambahkan padding top sedikit agar tidak terlalu mepet ke atas browser */
+            padding-top: 20px; 
         }
 
         h1 {
@@ -87,20 +87,19 @@
             text-align: center;
         }
 
-        /* KHUSUS UNTUK TAMPILAN PONSEL */
         @media (max-width: 480px) {
             .container {
                 padding: 40px 20px;
             }
             nav {
                 gap: 10px;
-                font-size: 15px; /* Tetap nyaman dibaca di layar kecil */
+                font-size: 15px;
             }
             h1 {
-                font-size: 28px; /* Ukuran judul nama sedikit mengecil agar pas */
+                font-size: 28px;
             }
             .bio {
-                font-size: 15px; /* Teks bio sedikit disesuaikan untuk layar HP */
+                font-size: 15px;
             }
         }
     </style>
@@ -108,7 +107,6 @@
 <body>
     <div class="container">
         <header>
-            <div style="font-weight: 700; font-style: italic; margin-bottom: 40px; font-size: 18px;">Ahmad</div>
             <nav>
                 <a href="index.html">About</a>
                 <a href="blog.html">TIL</a>
@@ -120,7 +118,7 @@
 
         <main class="bio">
             <p>
-                Halo! Saya Zul, seorang mahasiswa <span class="highlight">Arkeologi</span> di Universitas Gadjah Mada. Saya memiliki ketertarikan menulis, membaca, dan eksplor dunia yang belum pernah aku lihat.
+                Halo! Saya Ahmad Zulpiqor, seorang mahasiswa <span class="highlight">Arkeologi</span> di Universitas Gadjah Mada. Saya memiliki ketertarikan menulis, membaca, dan eksplor dunia yang belum pernah aku lihat.
             </p>
             <p>
                 Di sela kesibukan akademik, saya senang mengeksplorasi tempat-tempat baru, selain suka jalan-jalan saya juga suka tidur dan mencari ketenangan.
@@ -131,7 +129,7 @@
         </main>
 
         <footer>
-            © 2026 Ahmad Zulpiqor. Built with simplicity.
+            © 2026 Ahmad Zulpiqor.
         </footer>
     </div>
 </body>

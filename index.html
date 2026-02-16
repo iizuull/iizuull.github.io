@@ -6,7 +6,7 @@
     <title>Ahmad Zulpiqor</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* 1. Reset Total agar Ahmad Zulpiqor naik ke atas */
+        /* Reset Dasar */
         * {
             margin: 0;
             padding: 0;
@@ -20,29 +20,28 @@
             line-height: 1.7;
         }
 
-        /* 2. Container: Jarak atas dibuat sangat tipis (10px) */
+        /* Container: Padding atas kecil agar konten naik */
         .container {
             max-width: 650px;
             margin: 0 auto;
-            padding: 10px 20px; 
+            padding: 20px 20px;
         }
 
         header {
             margin-bottom: 20px;
         }
 
-        /* 3. Nav: Paksa Strip 3 ke pojok KIRI */
+        /* Navigasi: Ikon Strip 3 di Kiri */
         nav {
             display: flex;
-            justify-content: flex-start !important; 
+            justify-content: flex-start;
             align-items: center;
             position: relative;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
-        /* 4. Strip 3 (Hamburger): Selalu muncul di Laptop & HP */
         .hamburger {
-            display: block !important; 
+            display: block;
             font-size: 26px;
             cursor: pointer;
             color: #111827;
@@ -51,69 +50,74 @@
 
         #menu-toggle { display: none; }
 
-        /* 5. Menu Dropdown ala Saugi */
+        /* Menu Dropdown */
         .menu {
-            display: none; 
+            display: none;
             flex-direction: column;
             position: absolute;
             top: 40px;
             left: 0;
-            width: 180px;
+            width: 200px;
             background: white;
-            padding: 15px;
+            padding: 20px;
             border: 1px solid #f3f4f6;
             z-index: 100;
             list-style: none;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
-        /* Muncul saat Strip 3 diklik */
         #menu-toggle:checked ~ .menu {
             display: flex;
         }
 
-        .menu li { margin-bottom: 10px; }
+        .menu li { margin-bottom: 12px; }
         .menu a {
             text-decoration: none;
             color: #6b7280;
             font-size: 16px;
-            display: block;
+            transition: color 0.2s;
         }
 
         .menu a:hover { color: #111827; }
 
-        /* 6. Judul: Dibuat sangat mepet ke Navigasi */
+        /* Judul: Mepet ke atas, beri jarak ke bio */
         h1 {
             font-size: 32px;
             font-weight: 700;
-            margin-top: 0 !important;
-            margin-bottom: 24px;
+            margin-top: 0;
+            margin-bottom: 40px; /* Jarak agar tidak terlalu rapat dengan bio */
             text-align: center;
             letter-spacing: -0.02em;
         }
 
+        /* Bio: Teks Rapi */
         .bio {
             font-size: 16px;
-            color: #6b7280;
+            color: #4b5563;
             text-align: justify;
             text-justify: inter-word;
         }
 
-        .bio p { margin-bottom: 20px; }
-        .highlight { color: #111827; font-weight: 500; }
+        .bio p {
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: #111827;
+            font-weight: 500;
+        }
 
         footer {
             margin-top: 60px;
-            padding-top: 20px;
+            padding: 20px 0;
             border-top: 1px solid #f3f4f6;
             font-size: 13px;
-            color: #6b7280;
+            color: #9ca3af;
             text-align: center;
         }
 
         @media (max-width: 480px) {
             h1 { font-size: 28px; }
-            .container { padding-top: 10px; }
         }
     </style>
 </head>
@@ -126,7 +130,7 @@
 
                 <ul class="menu">
                     <li><a href="index.html">About</a></li>
-                    <li><a href="blog.html">TIL</a></li>
+                    <li><a href="blog.html">Today I Learned</a></li>
                     <li><a href="https://www.instagram.com/iizuuull_">Instagram</a></li>
                     <li><a href="mailto:ahmadzulpiqor@mail.ugm.ac.id">Contact</a></li>
                 </ul>
@@ -136,13 +140,19 @@
 
         <main class="bio">
             <p>
-                Halo! Saya <span class="highlight">Ahmad Zulpiqor</span>, biasa dipanggil <span class="highlight">iizuull</span>. Saat ini saya adalah mahasiswa Arkeologi di Universitas Gadjah Mada yang sedang fokus mendalami narasi masa lalu.
+                Halo! saya <span class="highlight">Ahmad Zulpiqor</span>, biasa dipanggil <span class="highlight">Zul</span>. Saat ini saya adalah mahasiswa Arkeologi di Universitas Gadjah Mada.
             </p>
             <p>
-                Di luar kesibukan akademik, saya aktif bekerja sebagai Freelancer di G2G. Saya juga mengisi waktu dengan membaca buku, memotret, dan sangat menikmati kegiatan solo traveling untuk mencari ketenangan sekaligus mengeksplorasi perspektif baru di setiap perjalanan.
+                Saya termasuk pribadi yang introvert—lebih nyaman mengamati, membaca, dan memproses banyak hal secara perlahan sebelum berbicara. Karena itu, menulis menjadi cara paling jujur bagi saya untuk berpikir dengan lebih teratur dan memahami sesuatu dengan lebih dalam.
             </p>
             <p>
-                Melalui ruang digital ini, khususnya di bagian <a href="blog.html" class="highlight" style="text-decoration: underline;">Today I Learned</a>, saya menantang diri untuk konsisten menulis setiap hari tentang proses belajar, rutinitas, dan hal-hal yang saya temui.
+                Di luar aktivitas akademik, saya juga bekerja sebagai freelancer di <span class="highlight">G2G Global</span>. Saya juga mengisi waktu dengan membaca buku, memotret, dan sangat menikmati kegiatan solo traveling untuk mencari ketenangan sekaligus mengeksplorasi perspektif baru di setiap perjalanan.
+            </p>
+            <p>
+                Website ini saya buat sebagai ruang dokumentasi pribadi. Khususnya melalui bagian <a href="blog.html" class="highlight" style="text-decoration: underline;">Today I Learned</a>, saya menantang diri untuk menulis setiap hari tentang apa yang saya pelajari—baik dari perkuliahan, buku, pekerjaan, perjalanan, maupun pengalaman sehari-hari. Tidak semua tulisan di sini bersifat akademik, sebagian adalah refleksi, sebagian lagi catatan kecil tentang kebiasaan, pemikiran, dan proses bertumbuh.
+            </p>
+            <p>
+                Tujuan utama dari ruang ini bukan untuk terlihat sempurna, melainkan untuk membangun konsistensi, memperjelas cara berpikir, dan merekam perjalanan belajar saya dari waktu ke waktu. Saya percaya bahwa pertumbuhan sering kali terjadi secara lambat dan catatan kecil yang dilakukan terus-menerus dapat menjadi jejak yang bermakna di kemudian hari.
             </p>
         </main>
 

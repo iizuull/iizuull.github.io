@@ -1,77 +1,44 @@
-/* Navigasi Utama */
-.main-nav {
+/* Container: Kurangi padding atas agar konten naik */
+.container {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 20px 20px; /* Diubah dari 60px ke 20px agar lebih naik */
+}
+
+/* Header & Nav: Hapus margin yang berlebihan */
+header {
+    margin-bottom: 20px; /* Diperkecil agar jarak nav ke H1 lebih dekat */
+}
+
+nav {
     display: flex;
-    justify-content: flex-start; /* Menggeser hamburger ke kiri */
+    justify-content: flex-start; /* Memastikan hamburger di kiri */
     align-items: center;
-    margin-bottom: 20px;         /* Mengurangi jarak agar judul di bawahnya naik */
-    padding: 10px 0;
+    margin-bottom: 10px;         /* Jarak minimal ke judul */
 }
 
-.main-nav .menu {
-    display: flex;
-    gap: 25px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.main-nav a {
-    font-size: 18px;
-    font-weight: 500;
-    text-decoration: none;
-    color: #666;
-    transition: 0.2s;
-}
-
-.main-nav a:hover {
-    color: #000;
-}
-
-/* Tombol Strip 3 */
-#menu-toggle { display: none; }
-.hamburger {
-    display: block; /* Selalu tampilkan untuk kemudahan navigasi di HP */
-    font-size: 24px;
-    cursor: pointer;
-    color: #333;
-}
-
-/* Khusus tampilan HP */
-@media (max-width: 768px) {
-    .main-nav .menu {
-        display: none; 
-        position: absolute;
-        top: 50px;
-        left: 0;        /* Dropdown muncul sejajar dengan icon di kiri */
-        width: 200px;
-        background: white;
-        flex-direction: column;
-        padding: 20px;
-        border: 1px solid #eee;
-        z-index: 100;
-        gap: 15px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-
-    #menu-toggle:checked ~ .menu {
-        display: flex;
-    }
-}
-
-/* Judul Ahmad Zulpiqor - Biar Naik ke Atas */
+/* Judul: Hapus margin atas sepenuhnya */
 h1 {
     font-size: 32px;
     font-weight: 700;
-    margin-top: 0;      /* Menghapus jarak atas agar lebih mepet ke nav */
+    margin-top: 0 !important;   /* Memaksa margin atas hilang */
     margin-bottom: 24px;
     text-align: center;
 }
 
-/* Bio rapi ala Saugi */
-main.bio p {
-    text-align: justify;
-    text-justify: inter-word;
-    font-size: 18px;
-    color: #444;
-    line-height: 1.8;
+/* Dropdown Menu HP agar tetap rapi di kiri */
+@media (max-width: 768px) {
+    .menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 40px;
+        left: 0;   /* Muncul dari sisi kiri sejajar hamburger */
+        width: 200px;
+        background: white;
+        padding: 20px;
+        border: 1px solid #f3f4f6;
+        z-index: 100;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
 }

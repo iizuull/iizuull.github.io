@@ -18,7 +18,11 @@
 }
 
 /* --- Global Reset --- */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
 
 body {
     font-family: 'Inter', sans-serif;
@@ -31,7 +35,7 @@ body {
 .container { 
     max-width: 650px; 
     margin: 0 auto; 
-    padding: 10px 20px 40px 20px; 
+    padding: 5px 20px 40px 20px; 
 }
 
 /* --- Navigasi --- */
@@ -40,7 +44,7 @@ nav {
     justify-content: flex-end;
     align-items: center;
     gap: 15px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 #theme-toggle, .hamburger {
@@ -67,43 +71,68 @@ nav {
     gap: 25px;
     transition: 0.4s ease-in-out;
     z-index: 1000;
-    list-style: none; /* MENGHAPUS TITIK MENU */
+    list-style: none; /* Menghapus titik-titik menu */
 }
 
 .menu.active { right: 0; }
-.menu li { list-style: none; } /* MEMASTIKAN TITIK HILANG */
+.menu li { list-style: none; } /* Memastikan bullets hilang */
 .menu a { text-decoration: none; color: var(--text); font-size: 18px; font-weight: 500; }
 
 /* --- Typography --- */
-h1 { font-size: 32px; font-weight: 700; text-align: center; margin: 10px 0 35px 0; }
+h1 { 
+    font-size: 32px; 
+    font-weight: 700; 
+    text-align: center; 
+    margin: 10px 0 35px 0; 
+}
 
 .bio p, .content-body p {
     text-align: justify !important;
-    text-justify: inter-word;
+    text-justify: inter-word !important;
     hyphens: auto;
     -webkit-hyphens: auto;
     margin-bottom: 20px;
 }
 
-/* Bold bersih tanpa shadow */
-b, strong, .highlight {
+.highlight, b, strong {
     background: none !important;
-    font-weight: 700;
     color: var(--text);
+    font-weight: 700;
+    padding: 0;
 }
 
-/* --- Blog List & Aksen Biru --- */
-.post-list { margin-top: 20px; }
-.post-item { display: flex; margin-bottom: 30px; text-decoration: none; color: inherit; }
+/* --- Blog Page Styles --- */
+.post-item { display: flex; margin-bottom: 25px; text-decoration: none; color: inherit; }
 .lang-label { min-width: 50px; color: var(--gray); font-size: 13px; margin-top: 5px; }
 .post-content h2 { font-size: 19px; font-weight: 500; margin-bottom: 4px; }
 .post-meta { font-size: 14px; color: var(--gray); }
 
-/* Warna biru kategori */
+/* Menambahkan warna biru pada kategori blog */
 .post-meta span {
     color: var(--accent);
     font-weight: 500;
 }
 
+/* Style Tombol Kembali ke Blog agar lebih cantik */
+.back-link {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--gray);
+    font-size: 14px;
+    margin-bottom: 30px;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: var(--accent);
+}
+
 /* --- Footer --- */
-footer { margin-top: 80px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 13px; color: var(--gray); text-align: center; }
+footer { 
+    margin-top: 80px; 
+    padding-top: 20px; 
+    border-top: 1px solid var(--border); 
+    font-size: 13px; 
+    color: var(--gray); 
+    text-align: center; 
+}

@@ -11,10 +11,11 @@
     <div class="container">
         <header>
             <nav>
-                <input type="checkbox" id="menu-toggle">
-                <label for="menu-toggle" class="hamburger">&#9776;</label>
+                <button id="theme-toggle" title="Ubah Tema">🌙</button>
+                
+                <div class="hamburger" id="hamburger">☰</div>
 
-                <ul class="menu">
+                <ul class="menu" id="menu">
                     <li><a href="index.html">About</a></li>
                     <li><a href="blog.html">Today I Learned</a></li>
                     <li><a href="https://www.instagram.com/iizuuull_">Instagram</a></li>
@@ -35,10 +36,10 @@
                 Di luar aktivitas akademik, saya juga bekerja sebagai freelancer di <span class="highlight">G2G Global</span>. Saya juga mengisi waktu dengan membaca buku, memotret, dan sangat menikmati kegiatan traveling untuk mencari ketenangan sekaligus mengeksplorasi perspektif baru di setiap perjalanan.
             </p>
             <p>
-                Website ini saya buat sebagai ruang dokumentasi pribadi. Khususnya melalui bagian <a href="blog.html" class="highlight" style="text-decoration: underline;">Today I Learned</a>, saya menantang diri untuk menulis setiap hari tentang apa yang saya pelajari—baik dari perkuliahan, buku, pekerjaan, perjalanan, maupun pengalaman sehari-hari. Tidak semua tulisan di sini bersifat akademik, sebagian adalah refleksi, sebagian lagi catatan kecil tentang kebiasaan, pemikiran, dan proses bertumbuh.
+                Website ini saya buat sebagai ruang dokumentasi pribadi. Khususnya melalui bagian <a href="blog.html" class="highlight" style="text-decoration: underline;">Today I Learned</a>, saya menantang diri untuk menulis setiap hari tentang apa yang saya pelajari. Tidak semua tulisan di sini bersifat akademik, sebagian adalah refleksi, sebagian lagi catatan kecil tentang kebiasaan, pemikiran, dan proses bertumbuh.
             </p>
             <p>
-                Tujuan utama dari ruang ini bukan untuk terlihat sempurna, melainkan untuk membangun konsistensi, memperjelas cara berpikir, dan merekam perjalanan belajar saya dari waktu ke waktu. Saya percaya bahwa pertumbuhan sering kali terjadi secara lambat dan catatan kecil yang dilakukan terus-menerus dapat menjadi jejak yang bermakna di kemudian hari.
+                Tujuan utama dari ruang ini bukan untuk terlihat sempurna, melainkan untuk membangun konsistensi, memperjelas cara berpikir, dan merekam perjalanan belajar saya dari waktu ke waktu.
             </p>
         </main>
 
@@ -46,5 +47,34 @@
             © 2026 Ahmad Zulpiqor. Built with simplicity.
         </footer>
     </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const menu = document.getElementById('menu');
+        const themeToggle = document.getElementById('theme-toggle');
+
+        // Logika Menu Geser
+        hamburger.addEventListener('click', () => {
+            menu.classList.toggle('active');
+            hamburger.innerHTML = menu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Logika Mode Gelap
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            themeToggle.innerHTML = isDark ? '🌙' : '☀️';
+            
+            // Simpan preferensi agar tidak berubah saat ganti halaman
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        });
+
+        // Cek preferensi tema yang tersimpan
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            themeToggle.innerHTML = savedTheme === 'dark' ? '☀️' : '🌙';
+        }
+    </script>
 </body>
 </html>

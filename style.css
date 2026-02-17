@@ -91,7 +91,7 @@ h1 {
     display: flex; 
     margin-bottom: 25px; 
     text-decoration: none !important; 
-    color: inherit !important; /* Paksa warna ikut teks utama agar tidak biru */
+    color: inherit !important; /* Paksa warna agar judul tidak jadi biru */
 }
 
 .post-item.hidden { 
@@ -107,7 +107,7 @@ h1 {
 
 .post-content a {
     text-decoration: none !important;
-    color: inherit !important; /* Menghilangkan warna biru link browser */
+    color: inherit !important; /* Menghilangkan warna biru link default browser */
 }
 
 .post-content h2 { 
@@ -115,7 +115,7 @@ h1 {
     font-weight: 500; 
     margin-bottom: 4px; 
     text-align: left !important;
-    color: var(--text) !important;
+    color: var(--text) !important; /* Pastikan judul tetap hitam/putih sesuai tema */
 }
 
 .post-item:hover h2 {
@@ -138,7 +138,7 @@ h1 {
     text-decoration: underline; 
 }
 
-/* --- Tampilan Judul Tag (Filter) --- */
+/* --- Tag Header (Filter) --- */
 #tag-header {
     display: none;
     margin-bottom: 35px;
@@ -164,9 +164,9 @@ h1 {
 .back-link {
     display: inline-block;
     text-decoration: none !important;
-    color: var(--gray) !important; /* Warna abu-abu bersih agar tidak ungu/biru */
+    color: var(--gray) !important;
     font-size: 14px;
-    margin-bottom: 20px;
+    margin-bottom: 35px; /* Tambah jarak bawah link "Kembali" agar lega */
     transition: color 0.2s;
 }
 
@@ -177,25 +177,28 @@ h1 {
 .post-header h1 {
     color: var(--text) !important;
     text-align: left !important;
-    margin: 10px 0;
+    margin: 15px 0 20px 0; /* Jarak judul yang lebih lega */
+    line-height: 1.3;
 }
 
 .category-tag {
     display: inline-block;
     background-color: var(--border) !important;
     color: var(--text) !important;
-    padding: 4px 12px;
+    padding: 6px 14px;
     border-radius: 6px;
     font-size: 13px;
     font-weight: 500;
-    margin-right: 5px;
+    margin-right: 8px;
+    margin-bottom: 40px; /* Tambah jarak lebar antara Topik dan Isi Tulisan agar tidak dekat */
 }
 
-/* --- Content Styling --- */
-.bio p, .content-body p {
+/* --- Isi Konten Tulisan --- */
+.content-body p {
     text-align: justify !important;
     text-justify: inter-word !important;
-    margin-bottom: 20px;
+    margin-bottom: 25px; /* Jarak antar paragraf lebih lega */
+    line-height: 1.8;
 }
 
 /* --- Footer --- */

@@ -36,7 +36,7 @@
                 Di luar aktivitas akademik, saya juga bekerja sebagai freelancer di <span class="highlight">G2G Global</span>. Saya juga mengisi waktu dengan membaca buku, memotret, dan sangat menikmati kegiatan traveling untuk mencari ketenangan sekaligus mengeksplorasi perspektif baru di setiap perjalanan.
             </p>
             <p>
-                Website ini saya buat sebagai ruang dokumentasi pribadi. Khususnya melalui bagian <a href="blog.html" class="highlight" style="text-decoration: underline;">Today I Learned</a>, saya menantang diri untuk menulis setiap hari tentang apa yang saya pelajari. Tidak semua tulisan di sini bersifat akademik, sebagian adalah refleksi, sebagian lagi catatan kecil tentang kebiasaan, pemikiran, dan proses bertumbuh.
+                Website ini saya buat sebagai ruang dokumentasi pribadi. Khususnya melalui bagian <a href="blog.html" class="highlight" style="text-decoration: underline;">Today I Learned</a>, saya menantang diri untuk menulis setiap hari tentang apa yang saya pelajari.
             </p>
             <p>
                 Tujuan utama dari ruang ini bukan untuk terlihat sempurna, melainkan untuk membangun konsistensi, memperjelas cara berpikir, dan merekam perjalanan belajar saya dari waktu ke waktu.
@@ -53,7 +53,7 @@
         const menu = document.getElementById('menu');
         const themeToggle = document.getElementById('theme-toggle');
 
-        // Logika Menu Geser
+        // Logika Buka-Tutup Menu
         hamburger.addEventListener('click', () => {
             menu.classList.toggle('active');
             hamburger.innerHTML = menu.classList.contains('active') ? '✕' : '☰';
@@ -61,19 +61,23 @@
 
         // Logika Mode Gelap
         themeToggle.addEventListener('click', () => {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-            themeToggle.innerHTML = isDark ? '🌙' : '☀️';
-            
-            // Simpan preferensi agar tidak berubah saat ganti halaman
-            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeToggle.innerHTML = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
         });
 
-        // Cek preferensi tema yang tersimpan
+        // Memuat tema yang tersimpan
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            themeToggle.innerHTML = savedTheme === 'dark' ? '☀️' : '🌙';
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeToggle.innerHTML = '☀️';
         }
     </script>
 </body>

@@ -11,22 +11,31 @@
         .post-meta span:hover { text-decoration: underline; }
         .post-item.hidden { display: none; }
         
-        #reset-filter {
+        /* Style untuk judul Tag ala Saugi */
+        #tag-header {
             display: none;
-            margin-bottom: 20px;
-            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        #tag-header h1 {
+            text-align: left !important;
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .back-to-all {
+            display: inline-block;
             color: var(--accent);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 10px;
             cursor: pointer;
-            background: none;
-            border: none;
-            padding: 0;
-            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
+        <header id="main-header">
             <nav>
                 <button id="theme-toggle" title="Ubah Tema">🌙</button>
                 <div class="hamburger" id="hamburger">☰</div>
@@ -38,11 +47,14 @@
                     <li><a href="mailto:ahmadzulpiqor@mail.ugm.ac.id">Contact</a></li>
                 </ul>
             </nav>
-            <h1>Today I Learned</h1>
+            <h1 id="page-title">Today I Learned</h1>
         </header>
-        
-        <button id="reset-filter">← Show all posts</button>
 
+        <div id="tag-header">
+            <span class="back-to-all" id="reset-filter">← Back to all posts</span>
+            <h1 id="tag-title">Tag: Health</h1>
+        </div>
+        
         <div class="post-list" id="post-list">
             <a href="posts/216.html" class="post-item" data-category="Religion Mind">
                 <div class="lang-label">ID</div>
@@ -80,14 +92,17 @@
         const themeToggle = document.getElementById('theme-toggle');
         const posts = document.querySelectorAll('.post-item');
         const resetBtn = document.getElementById('reset-filter');
+        const mainHeaderTitle = document.getElementById('page-title');
+        const tagHeader = document.getElementById('tag-header');
+        const tagTitle = document.getElementById('tag-title');
 
-        // --- Logika Filter Multi-Topik ---
+        // --- Logika Filter Tag ala Saugi ---
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('cat-link')) {
                 const targetCategory = e.target.innerText.trim();
                 
+                // 1. Filter List Postingan
                 posts.forEach(post => {
-                    // Cek apakah target ada di dalam list data-category (dipisah spasi)
                     const categories = post.getAttribute('data-category').split(' ');
                     if (categories.includes(targetCategory)) {
                         post.classList.remove('hidden');
@@ -96,17 +111,23 @@
                     }
                 });
                 
-                resetBtn.style.display = 'block';
-                resetBtn.innerHTML = `← Show all posts (Topic: ${targetCategory})`;
+                // 2. Ubah UI Header
+                mainHeaderTitle.style.display = 'none'; // Sembunyikan judul asli
+                tagHeader.style.display = 'block';     // Munculkan Tag Header
+                tagTitle.innerText = `Tag: ${targetCategory}`;
+                
+                window.scrollTo(0, 0); // Balik ke atas otomatis
             }
         });
 
+        // Balik ke tampilan normal
         resetBtn.addEventListener('click', () => {
             posts.forEach(post => post.classList.remove('hidden'));
-            resetBtn.style.display = 'none';
+            tagHeader.style.display = 'none';
+            mainHeaderTitle.style.display = 'block';
         });
 
-        // --- Logika Navigasi ---
+        // --- Navigasi & Tema ---
         hamburger.addEventListener('click', (e) => {
             e.stopPropagation();
             menu.classList.toggle('active');
@@ -120,7 +141,6 @@
             }
         });
 
-        // --- Logika Mode Gelap ---
         themeToggle.addEventListener('click', () => {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
             document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
@@ -130,9 +150,4 @@
 
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            themeToggle.innerHTML = '☀️';
-        }
-    </script>
-</body>
-</html>
+            document.documentElement

@@ -18,11 +18,7 @@
 }
 
 /* --- Global Reset --- */
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: 'Inter', sans-serif;
@@ -35,69 +31,55 @@ body {
 .container { 
     max-width: 650px; 
     margin: 0 auto; 
-    padding: 20px 25px 40px 25px; /* Jarak samping HP agar rata kanan-kiri rapi */
+    padding: 20px 25px 40px 25px; 
 }
 
-/* --- Typography (Nama di Home) --- */
+/* --- Typography (Nama Ahmad Zulpiqor) --- */
 h1 { 
     font-size: 32px; 
-    font-weight: 800 !important; /* DIBUAT SANGAT BOLD KAYA AWAL */
+    font-weight: 800 !important; /* Paksa Bold Maksimal */
     text-align: center !important; 
     margin: 10px 0 35px 0; 
-    color: var(--text);
+    letter-spacing: -0.5px;
 }
 
-/* Judul di dalam postingan tetap rata kiri */
 .post-header h1 {
     text-align: left !important;
-    margin: 15px 0 20px 0;
+    margin: 15px 0 10px 0;
     font-weight: 700 !important;
 }
 
-/* --- Halaman Blog (Warna Statis - Anti Biru) --- */
-.post-item { 
-    display: flex; 
-    margin-bottom: 25px; 
-    text-decoration: none !important; 
-}
+/* --- Anti-Biru untuk Semua Judul di Daftar Blog --- */
+.post-item { text-decoration: none !important; margin-bottom: 25px; display: flex; }
 
-.post-content a, .post-content a:visited, .post-content a:active, .post-content a:hover {
+.post-content a, .post-content a:visited, .post-content a:active {
     text-decoration: none !important;
-    color: var(--text) !important; /* Paksa tetap hitam/putih */
+    color: var(--text) !important; /* Kunci warna teks utama */
 }
 
-/* --- Isi Konten (Rata Kanan Kiri & Space HP) --- */
+.post-content h2 { font-size: 19px; font-weight: 600; text-align: left !important; }
+
+/* --- Tombol Kembali (Kunci Warna Abu-Abu) --- */
+.back-link, .back-link:visited, .back-link:active {
+    display: inline-block;
+    text-decoration: none !important;
+    color: var(--gray) !important; /* Paksa abu-abu walau sudah diklik */
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.back-link:hover { color: var(--accent) !important; }
+
+/* --- Isi Konten (Rata Kanan Kiri Rapi HP) --- */
 .bio p, .content-body p {
     text-align: justify !important;
     text-justify: inter-word !important;
     hyphens: auto;
     -webkit-hyphens: auto;
-    margin-bottom: 25px; 
-    line-height: 1.8;
+    margin-bottom: 25px;
 }
 
-/* Bold untuk nama di dalam paragraf bio */
-.bio p strong, .content-body p strong {
-    font-weight: 700;
-    color: var(--text);
-}
-
-/* --- Tombol Kembali (Biar Gak Jelek & Biru) --- */
-.back-link {
-    display: inline-block;
-    text-decoration: none !important; /* Hapus garis bawah jelek */
-    color: var(--gray) !important; /* Warna abu-abu bersih, bukan biru */
-    font-size: 14px;
-    margin-bottom: 35px;
-    transition: color 0.2s;
-}
-
-.back-link:hover {
-    color: var(--accent) !important;
-    text-decoration: underline !important;
-}
-
-/* --- Category Tag (Jarak ke Teks) --- */
+/* --- Jarak Topik ke Teks --- */
 .category-tag {
     display: inline-block;
     background-color: var(--border) !important;
@@ -106,7 +88,7 @@ h1 {
     border-radius: 6px;
     font-size: 13px;
     font-weight: 500;
-    margin-bottom: 45px; /* Jarak agar tidak menempel ke tulisan */
+    margin-bottom: 40px; /* Jarak agar tidak menempel */
 }
 
 /* --- Footer --- */

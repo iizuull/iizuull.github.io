@@ -4,70 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consistency - Ahmad Zulpiqor</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: #fff; 
-            color: #222; 
-            margin: 0; 
-            padding: 0; 
-            line-height: 1.8; /* Jarak antar baris biar gak pusing bacanya */
-        }
-        .container { 
-            max-width: 700px; 
-            margin: 40px auto; 
-            padding: 0 20px; 
-        }
-        .back-link {
-            text-decoration: none;
-            color: #666;
-            font-size: 15px;
-            display: block;
-            margin-bottom: 30px;
-        }
-        h1 { 
-            font-size: 32px; 
-            font-weight: 600; 
-            margin-bottom: 10px;
-            letter-spacing: -0.02em;
-        }
-        .meta { 
-            font-size: 14px; 
-            color: #999; 
-            margin-bottom: 40px; 
-        }
-        .content {
-            font-size: 17px; /* Ukuran teks artikel yang pas di HP */
-            color: #333;
-        }
-        .content p {
-            margin-bottom: 20px;
-        }
-
-        /* Perbaikan khusus HP */
-        @media (max-width: 600px) {
-            .container { margin: 20px auto; }
-            h1 { font-size: 26px; }
-            .content { font-size: 16px; }
-            .back-link { font-size: 17px; padding: 10px 0; } /* Menu kembali jadi lebih besar */
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <div class="container">
         <a href="../blog.html" class="back-link">← Kembali ke Blog</a>
         
-        <h1>Consistency</h1>
-        <div class="meta">16 Februari 2026 — Ahmad Zulpiqor</div>
+        <header class="post-header">
+            <h1>Consistency</h1>
+            <div class="meta-detail">16 Februari 2026 — Ahmad Zulpiqor</div>
+        </header>
         
-        <div class="content">
-            <p>Hari ini aku belajar ternyata konsistensi dan disiplin itu adalah hal sangat sulit. Beberapa kali aku memulai untuk tetap konsisten, tetapi hasilnya masih kurang memuaskan...</p>
+        <article class="content-body">
+            <p>
+                Hari ini aku belajar ternyata konsistensi dan disiplin itu adalah hal sangat sulit. Beberapa kali aku memulai untuk tetap konsisten, tetapi hasilnya masih kurang memuaskan...
+            </p>
             
-            <p>Aku sangat termotivasi dari beberapa orang, seperti Ahmad Saugi dan Ivan Lanin, mereka sangat keren karena bisa begitu konsisten dalam hidupnya terutama dalam menulis.</p>
+            <p>
+                Aku sangat termotivasi dari beberapa orang, seperti <span class="highlight">Ahmad Saugi</span> dan <span class="highlight">Ivan Lanin</span>, mereka sangat keren karena bisa begitu konsisten dalam hidupnya terutama dalam menulis.
+            </p>
             
-            <p>Hasil dari motivasi yang kudapatkan, aku tuangkan kedalam semua ini sebagai bahan ajar sekaligus bekal awal saya kedepannya. Aku berharap bisa konsisten meskipun dalam keadaan sulit sekalipun, dengan ini aku memulai hal baru dengan menulis setiap hari.</p>
-        </div>
+            <p>
+                Hasil dari motivasi yang kudapatkan, aku tuangkan kedalam semua ini sebagai bahan ajar sekaligus bekal awal saya kedepannya. Aku berharap bisa konsisten meskipun dalam keadaan sulit sekalipun, dengan ini aku memulai hal baru dengan menulis setiap hari.
+            </p>
+        </article>
+
+        <footer>
+            © 2026 Ahmad Zulpiqor. Built with simplicity.
+        </footer>
     </div>
 </body>
 </html>

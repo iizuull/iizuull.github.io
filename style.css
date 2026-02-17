@@ -36,7 +36,7 @@ body {
 .container { 
     max-width: 650px; 
     margin: 0 auto; 
-    padding: 20px 20px 40px 20px; /* Padding atas dikurangi agar konten naik */
+    padding: 20px 20px 40px 20px; /* Padding atas dikurangi agar nama naik */
 }
 
 /* --- Navigasi --- */
@@ -98,16 +98,15 @@ h1 {
     margin-bottom: 40px; 
 }
 
-/* Tampilan default untuk HP: Rata Kiri */
+/* Aturan Teks: Rata Kiri di HP, Rata Kanan-Kiri di Laptop */
 .bio p, .content-body p {
-    text-align: left;
     margin-bottom: 20px;
+    text-align: left; /* Default HP */
 }
 
-/* Tampilan khusus untuk Laptop (Layar > 768px): Rata Kanan-Kiri */
 @media (min-width: 768px) {
     .bio p, .content-body p {
-        text-align: justify;
+        text-align: justify; /* Sejajar di Laptop */
     }
 }
 

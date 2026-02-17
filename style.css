@@ -31,7 +31,7 @@ body {
 .container { 
     max-width: 650px; 
     margin: 0 auto; 
-    padding: 20px 25px 40px 25px; /* Jarak samping HP agar rata */
+    padding: 20px 25px 40px 25px; 
 }
 
 /* --- Navigasi --- */
@@ -40,7 +40,6 @@ nav {
     justify-content: flex-end;
     align-items: center;
     gap: 15px;
-    margin-bottom: 0px;
 }
 
 #theme-toggle, .hamburger {
@@ -57,13 +56,13 @@ nav {
     padding: 80px 40px;
     display: flex; flex-direction: column; gap: 25px;
     transition: 0.4s ease-in-out; z-index: 1000;
-    list-style: none; /* Menghilangkan titik-titik menu */
+    list-style: none; /* Menghilangkan titik menu */
 }
 
 .menu.active { right: 0; }
-.menu a { text-decoration: none; color: var(--text); font-size: 18px; font-weight: 500; }
+.menu a { text-decoration: none; color: var(--text) !important; font-size: 18px; font-weight: 500; }
 
-/* --- Typography (Nama Ahmad Zulpiqor) --- */
+/* --- Typography (Nama & Judul Today I Learned) --- */
 h1 { 
     font-size: 32px; 
     font-weight: 800 !important; /* Nama Bold Maksimal */
@@ -71,29 +70,17 @@ h1 {
     margin: 10px 0 35px 0; 
 }
 
-/* Judul khusus di dalam artikel harian (rata kiri) */
+/* Judul artikel harian (rata kiri) */
 .post-header h1 {
     text-align: left !important;
     margin: 10px 0 10px 0;
     font-weight: 700 !important;
 }
 
-.post-header {
-    text-align: left !important; 
-    margin-bottom: 30px;
-}
+/* --- Daftar Blog (Anti-Biru & Statis) --- */
+.post-item { text-decoration: none !important; }
 
-/* --- Blog Page Styles (Anti-Biru & Statis) --- */
-.post-item { 
-    display: flex; 
-    margin-bottom: 25px; 
-    text-decoration: none !important; 
-    color: inherit; 
-}
-
-.post-item.hidden { display: none !important; }
-
-/* Kunci warna agar judul artikel TIDAK biru/ungu */
+/* Kunci warna judul agar tidak pernah biru/ungu */
 .post-content a, .post-content a:visited, .post-content a:active, .post-content a:link {
     text-decoration: none !important;
     color: var(--text) !important; 
@@ -104,42 +91,7 @@ h1 {
     margin-bottom: 4px; text-align: left !important; 
 }
 
-.post-item:hover h2 { color: var(--accent); }
-
-.post-meta { font-size: 14px; color: var(--gray); }
-
-/* Tag tetap berwarna agar menonjol */
-.cat-link {
-    cursor: pointer;
-    color: var(--accent);
-    font-weight: 500;
-}
-
-.cat-link:hover { text-decoration: underline; }
-
-/* --- Tag Header ala Saugi (Fungsi Filter) --- */
-#tag-header {
-    display: none;
-    margin-bottom: 35px;
-    text-align: left;
-}
-
-#tag-header h1 {
-    text-align: left !important;
-    margin: 0;
-    font-size: 32px;
-}
-
-.back-link-tag {
-    display: inline-block;
-    color: var(--gray);
-    text-decoration: none;
-    font-size: 14px;
-    margin-bottom: 15px;
-    cursor: pointer;
-}
-
-/* --- Content Styling (Rata Kanan Kiri & Jarak Lega) --- */
+/* --- Isi Konten & Bio (Rata Kanan Kiri HP) --- */
 .bio p, .content-body p {
     text-align: justify !important;
     text-justify: inter-word !important;
@@ -147,8 +99,8 @@ h1 {
     margin-bottom: 25px;
 }
 
-/* Tombol Kembali (Kunci Abu-Abu) */
-.back-link, .back-link:visited {
+/* Tombol Kembali (Kunci Abu-Abu Bersih) */
+.back-link, .back-link:visited, .back-link-tag {
     display: inline-block;
     text-decoration: none !important;
     color: var(--gray) !important;
@@ -156,10 +108,13 @@ h1 {
     margin-bottom: 30px;
 }
 
+.back-link:hover, .back-link-tag:hover { color: var(--accent) !important; }
+
+/* Category Tag & Jarak */
 .category-tag {
     display: inline-block;
-    background-color: var(--border); 
-    color: var(--text);
+    background-color: var(--border) !important;
+    color: var(--text) !important;
     padding: 6px 14px;
     border-radius: 6px;
     font-size: 13px;
@@ -169,7 +124,7 @@ h1 {
 
 /* --- Footer --- */
 footer { 
-    margin-top: 80px; padding-top: 20px; 
+    margin-top: 80px; padding: 20px 0; 
     border-top: 1px solid var(--border); 
     font-size: 13px; color: var(--gray); text-align: center; 
 }

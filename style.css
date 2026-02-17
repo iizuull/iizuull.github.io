@@ -54,6 +54,8 @@ nav {
     font-size: 22px;
     color: var(--text);
     padding: 10px;
+    position: relative; /* Agar z-index bekerja */
+    z-index: 1001;      /* Harus lebih tinggi dari .menu yang 1000 agar bisa diklik di HP */
 }
 
 .menu {
@@ -70,7 +72,7 @@ nav {
     flex-direction: column;
     gap: 25px;
     transition: 0.4s ease-in-out;
-    z-index: 1000;
+    z-index: 1000; /* Menu di lapisan bawah tombol hamburger */
     list-style: none;
 }
 
@@ -82,12 +84,12 @@ nav {
 h1 { 
     font-size: 32px; 
     font-weight: 700; 
-    text-align: left !important; /* Diubah ke kiri agar mirip saugi */
+    text-align: left !important; 
     margin: 10px 0 15px 0; 
 }
 
 .post-header {
-    text-align: left !important; /* Area header rata kiri */
+    text-align: left !important; 
     margin-bottom: 30px;
 }
 
@@ -101,7 +103,7 @@ h1 {
 /* --- Category Tag (Kotak Abu-abu Ala Saugi) --- */
 .category-tag {
     display: inline-block;
-    background-color: var(--border); /* Warna kotak abu-abu */
+    background-color: var(--border); 
     color: var(--text);
     padding: 4px 12px;
     border-radius: 6px;

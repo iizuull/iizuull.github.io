@@ -11,14 +11,15 @@
     <div class="container">
         <header>
             <nav>
-                <input type="checkbox" id="menu-toggle">
-                <label for="menu-toggle" class="hamburger">&#9776;</label>
+                <button id="theme-toggle" title="Ubah Tema">🌙</button>
+                
+                <div class="hamburger" id="hamburger">☰</div>
 
-                <ul class="menu">
+                <ul class="menu" id="menu">
                     <li><a href="index.html">About</a></li>
                     <li><a href="blog.html">Today I Learned</a></li>
                     <li><a href="https://www.instagram.com/iizuuull_">Instagram</a></li>
-                    <li><a href="index.html">Linkedin</a></li>
+                    <li><a href="https://www.linkedin.com/in/username-kamu">Linkedin</a></li>
                     <li><a href="mailto:ahmadzulpiqor@mail.ugm.ac.id">Contact</a></li>
                 </ul>
             </nav>
@@ -26,7 +27,6 @@
         </header>
         
         <div class="post-list">
-            
             <a href="posts/let-them.html" class="post-item">
                 <div class="lang-label">ID</div>
                 <div class="post-content">
@@ -56,5 +56,32 @@
             © 2026 Ahmad Zulpiqor. Built with simplicity.
         </footer>
     </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const menu = document.getElementById('menu');
+        const themeToggle = document.getElementById('theme-toggle');
+
+        // Logika Buka-Tutup Menu
+        hamburger.addEventListener('click', () => {
+            menu.classList.toggle('active');
+            hamburger.innerHTML = menu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Logika Mode Gelap
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            themeToggle.innerHTML = isDark ? '🌙' : '☀️';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        });
+
+        // Load tema tersimpan
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeToggle.innerHTML = '☀️';
+        }
+    </script>
 </body>
 </html>

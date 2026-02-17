@@ -68,8 +68,7 @@ nav {
     border-left: 1px solid var(--border);
     padding: 80px 40px;
     display: flex;
-    flex-direction: column;
-    gap: 25px;
+    flex-direction: column; gap: 25px;
     transition: 0.4s ease-in-out;
     z-index: 1000;
     list-style: none;
@@ -86,28 +85,20 @@ h1 {
     margin: 10px 0 35px 0; 
 }
 
-/* --- Halaman Blog (Daftar Tulisan) --- */
+/* --- Halaman Blog (Anti-Biru) --- */
 .post-item { 
     display: flex; 
     margin-bottom: 25px; 
     text-decoration: none !important; 
-    color: inherit !important; /* Paksa warna agar judul tidak jadi biru */
 }
 
-.post-item.hidden { 
-    display: none !important; 
-}
-
-.lang-label { 
-    min-width: 50px; 
-    color: var(--gray); 
-    font-size: 13px; 
-    margin-top: 5px; 
-}
-
-.post-content a {
+/* Kunci semua status link agar tetap putih/hitam walau sudah diklik */
+.post-content a,
+.post-content a:visited,
+.post-content a:active,
+.post-content a:link {
     text-decoration: none !important;
-    color: inherit !important; /* Menghilangkan warna biru link default browser */
+    color: var(--text) !important; /* Paksa warna ikut tema */
 }
 
 .post-content h2 { 
@@ -115,11 +106,18 @@ h1 {
     font-weight: 500; 
     margin-bottom: 4px; 
     text-align: left !important;
-    color: var(--text) !important; /* Pastikan judul tetap hitam/putih sesuai tema */
+    color: inherit !important;
 }
 
 .post-item:hover h2 {
-    color: var(--accent) !important;
+    color: var(--accent) !important; /* Berubah warna saat disentuh */
+}
+
+.lang-label { 
+    min-width: 50px; 
+    color: var(--gray); 
+    font-size: 13px; 
+    margin-top: 5px; 
 }
 
 .post-meta { 
@@ -134,9 +132,7 @@ h1 {
     text-decoration: none;
 }
 
-.cat-link:hover { 
-    text-decoration: underline; 
-}
+.cat-link:hover { text-decoration: underline; }
 
 /* --- Tag Header (Filter) --- */
 #tag-header {
@@ -160,13 +156,13 @@ h1 {
     cursor: pointer;
 }
 
-/* --- Halaman Isi Postingan (Baca Artikel) --- */
+/* --- Halaman Isi Postingan (Jarak Lega) --- */
 .back-link {
     display: inline-block;
     text-decoration: none !important;
     color: var(--gray) !important;
     font-size: 14px;
-    margin-bottom: 35px; /* Tambah jarak bawah link "Kembali" agar lega */
+    margin-bottom: 35px; /* Jarak bawah link kembali */
     transition: color 0.2s;
 }
 
@@ -177,7 +173,7 @@ h1 {
 .post-header h1 {
     color: var(--text) !important;
     text-align: left !important;
-    margin: 15px 0 20px 0; /* Jarak judul yang lebih lega */
+    margin: 15px 0 20px 0; /* Jarak judul lega */
     line-height: 1.3;
 }
 
@@ -190,23 +186,8 @@ h1 {
     font-size: 13px;
     font-weight: 500;
     margin-right: 8px;
-    margin-bottom: 40px; /* Tambah jarak lebar antara Topik dan Isi Tulisan agar tidak dekat */
+    margin-bottom: 45px; /* JARAK TOPIK KE TEKS */
 }
 
 /* --- Isi Konten Tulisan --- */
-.content-body p {
-    text-align: justify !important;
-    text-justify: inter-word !important;
-    margin-bottom: 25px; /* Jarak antar paragraf lebih lega */
-    line-height: 1.8;
-}
-
-/* --- Footer --- */
-footer { 
-    margin-top: 80px; 
-    padding-top: 20px; 
-    border-top: 1px solid var(--border); 
-    font-size: 13px; 
-    color: var(--gray); 
-    text-align: center; 
-}
+.content-body p

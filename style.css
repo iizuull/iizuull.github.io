@@ -41,10 +41,10 @@ body {
 /* --- Navigasi --- */
 nav {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end; /* Tetap di kanan */
     align-items: center;
     gap: 15px;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
 }
 
 #theme-toggle, .hamburger {
@@ -54,8 +54,8 @@ nav {
     font-size: 22px;
     color: var(--text);
     padding: 10px;
-    position: relative; /* Agar z-index bekerja */
-    z-index: 1001;      /* Harus lebih tinggi dari .menu yang 1000 agar bisa diklik di HP */
+    position: relative;
+    z-index: 1001;
 }
 
 .menu {
@@ -72,27 +72,37 @@ nav {
     flex-direction: column;
     gap: 25px;
     transition: 0.4s ease-in-out;
-    z-index: 1000; /* Menu di lapisan bawah tombol hamburger */
+    z-index: 1000;
     list-style: none;
 }
 
 .menu.active { right: 0; }
-.menu li { list-style: none; }
 .menu a { text-decoration: none; color: var(--text); font-size: 18px; font-weight: 500; }
 
-/* --- Typography & Header (Fixed ala Saugi) --- */
+/* --- Typography & Header (DIUBAH KE TENGAH) --- */
 h1 { 
     font-size: 32px; 
     font-weight: 700; 
-    text-align: left !important; 
-    margin: 10px 0 15px 0; 
+    text-align: center; /* Nama Ahmad Zulpiqor jadi ke tengah */
+    margin: 20px 0 40px 0; 
+    width: 100%;
 }
 
 .post-header {
-    text-align: left !important; 
+    text-align: left; 
     margin-bottom: 30px;
 }
 
+/* --- Bio Content (TETAP RATA KIRI/JUSTIFY) --- */
+.bio p, .content-body p {
+    text-align: justify !important; /* Agar isi teks web tidak ikut ke tengah */
+    text-justify: inter-word !important;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    margin-bottom: 20px;
+}
+
+/* --- Sisanya tetap sama --- */
 .meta-detail {
     font-size: 14px;
     color: var(--gray);
@@ -100,7 +110,6 @@ h1 {
     display: block;
 }
 
-/* --- Category Tag (Kotak Abu-abu Ala Saugi) --- */
 .category-tag {
     display: inline-block;
     background-color: var(--border); 
@@ -112,14 +121,6 @@ h1 {
     margin-top: 5px;
 }
 
-.bio p, .content-body p {
-    text-align: justify !important;
-    text-justify: inter-word !important;
-    hyphens: auto;
-    -webkit-hyphens: auto;
-    margin-bottom: 20px;
-}
-
 .highlight, b, strong {
     background: none !important;
     color: var(--text);
@@ -127,7 +128,6 @@ h1 {
     padding: 0;
 }
 
-/* --- Blog Page Styles --- */
 .post-item { display: flex; margin-bottom: 25px; text-decoration: none; color: inherit; }
 .lang-label { min-width: 50px; color: var(--gray); font-size: 13px; margin-top: 5px; }
 .post-content h2 { font-size: 19px; font-weight: 500; margin-bottom: 4px; text-align: left !important; }
@@ -151,7 +151,6 @@ h1 {
     color: var(--accent);
 }
 
-/* --- Footer --- */
 footer { 
     margin-top: 80px; 
     padding-top: 20px; 

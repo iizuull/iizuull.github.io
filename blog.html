@@ -6,19 +6,34 @@
     <title>Today I Learned - Ahmad Zulpiqor</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .post-meta span { cursor: pointer; color: var(--accent); font-weight: 500; }
+        .post-meta span:hover { text-decoration: underline; }
+        .post-item.hidden { display: none; }
+        
+        #reset-filter {
+            display: none;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--accent);
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <header>
             <nav>
                 <button id="theme-toggle" title="Ubah Tema">🌙</button>
-                
                 <div class="hamburger" id="hamburger">☰</div>
-
                 <ul class="menu" id="menu">
                     <li><a href="index.html">About</a></li>
                     <li><a href="blog.html">Today I Learned</a></li>
-                    <li><a href="https://www.instagram.com/iizuuull_">Instagram</a></li>
+                    <li><a href="https://www.instagram.com/iizuull__">Instagram</a></li>
                     <li><a href="https://www.linkedin.com/in/username-kamu">Linkedin</a></li>
                     <li><a href="mailto:ahmadzulpiqor@mail.ugm.ac.id">Contact</a></li>
                 </ul>
@@ -26,28 +41,30 @@
             <h1>Today I Learned</h1>
         </header>
         
-        <div class="post-list">
-            <a href="posts/216.html" class="post-item">
+        <button id="reset-filter">← Show all posts</button>
+
+        <div class="post-list" id="post-list">
+            <a href="posts/216.html" class="post-item" data-category="Religion Mind">
                 <div class="lang-label">ID</div>
                 <div class="post-content">
                     <h2>Al baqarah: 216</h2>
-                    <div class="post-meta">Feb 17, 2026 — <span>Religion</span></div>
+                    <div class="post-meta">Feb 17, 2026 — <span class="cat-link">Religion</span>, <span class="cat-link">Mind</span></div>
                 </div>
             </a>
             
-            <a href="posts/let-them.html" class="post-item">
+            <a href="posts/let-them.html" class="post-item" data-category="Mind">
                 <div class="lang-label">ID</div>
                 <div class="post-content">
                     <h2>Let Them</h2>
-                    <div class="post-meta">Feb 17, 2026 — <span>Mind</span></div>
+                    <div class="post-meta">Feb 17, 2026 — <span class="cat-link">Mind</span></div>
                 </div>
             </a>
             
-            <a href="posts/belajar-konsisten.html" class="post-item">
+            <a href="posts/belajar-konsisten.html" class="post-item" data-category="Motivation">
                 <div class="lang-label">ID</div>
                 <div class="post-content">
                     <h2>Consistency</h2>
-                    <div class="post-meta">Feb 16, 2026 — <span>Motivation</span></div>
+                    <div class="post-meta">Feb 16, 2026 — <span class="cat-link">Motivation</span></div>
                 </div>
             </a>
         </div>
@@ -61,14 +78,49 @@
         const hamburger = document.getElementById('hamburger');
         const menu = document.getElementById('menu');
         const themeToggle = document.getElementById('theme-toggle');
+        const posts = document.querySelectorAll('.post-item');
+        const resetBtn = document.getElementById('reset-filter');
 
-        // Logika Buka-Tutup Menu
-        hamburger.addEventListener('click', () => {
+        // --- Logika Filter Multi-Topik ---
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('cat-link')) {
+                const targetCategory = e.target.innerText.trim();
+                
+                posts.forEach(post => {
+                    // Cek apakah target ada di dalam list data-category (dipisah spasi)
+                    const categories = post.getAttribute('data-category').split(' ');
+                    if (categories.includes(targetCategory)) {
+                        post.classList.remove('hidden');
+                    } else {
+                        post.classList.add('hidden');
+                    }
+                });
+                
+                resetBtn.style.display = 'block';
+                resetBtn.innerHTML = `← Show all posts (Topic: ${targetCategory})`;
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            posts.forEach(post => post.classList.remove('hidden'));
+            resetBtn.style.display = 'none';
+        });
+
+        // --- Logika Navigasi ---
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
             menu.classList.toggle('active');
             hamburger.innerHTML = menu.classList.contains('active') ? '✕' : '☰';
         });
 
-        // Logika Mode Gelap
+        document.addEventListener('click', (e) => {
+            if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+                menu.classList.remove('active');
+                hamburger.innerHTML = '☰';
+            }
+        });
+
+        // --- Logika Mode Gelap ---
         themeToggle.addEventListener('click', () => {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
             document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
@@ -76,7 +128,6 @@
             localStorage.setItem('theme', isDark ? 'light' : 'dark');
         });
 
-        // Load tema tersimpan
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');

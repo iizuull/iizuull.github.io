@@ -35,169 +35,84 @@ body {
 .container { 
     max-width: 650px; 
     margin: 0 auto; 
-    padding: 5px 20px 40px 20px; 
+    padding: 20px 25px 40px 25px; /* Jarak samping HP agar rata kanan-kiri rapi */
 }
 
-/* --- Navigasi --- */
-nav {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 0px;
-}
-
-#theme-toggle, .hamburger {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 22px;
-    color: var(--text);
-    padding: 10px;
-    position: relative;
-    z-index: 1001;
-}
-
-.menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 250px;
-    height: 100%;
-    background: var(--menu-bg);
-    backdrop-filter: blur(10px);
-    border-left: 1px solid var(--border);
-    padding: 80px 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    transition: 0.4s ease-in-out;
-    z-index: 1000;
-    list-style: none;
-}
-
-.menu.active { right: 0; }
-.menu a { text-decoration: none; color: var(--text); font-size: 18px; font-weight: 500; }
-
-/* --- Typography --- */
+/* --- Typography (Nama di Home) --- */
 h1 { 
     font-size: 32px; 
-    font-weight: 700; 
-    text-align: center; /* Judul Today I Learned tetap di tengah */
+    font-weight: 800 !important; /* DIBUAT SANGAT BOLD KAYA AWAL */
+    text-align: center !important; 
     margin: 10px 0 35px 0; 
+    color: var(--text);
 }
 
-/* Judul khusus di dalam artikel harian (rata kiri) */
+/* Judul di dalam postingan tetap rata kiri */
 .post-header h1 {
     text-align: left !important;
-    margin: 10px 0 10px 0;
+    margin: 15px 0 20px 0;
+    font-weight: 700 !important;
 }
 
-.post-header {
-    text-align: left !important; 
-    margin-bottom: 30px;
-}
-
-.meta-detail {
-    font-size: 14px;
-    color: var(--gray);
-    margin-bottom: 5px;
-    display: block;
-}
-
-/* --- Blog Page Styles (Link & Filter) --- */
+/* --- Halaman Blog (Warna Statis - Anti Biru) --- */
 .post-item { 
     display: flex; 
     margin-bottom: 25px; 
-    text-decoration: none; 
-    color: inherit; /* Menghilangkan warna biru link */
+    text-decoration: none !important; 
 }
 
-.post-item.hidden { 
-    display: none !important; 
+.post-content a, .post-content a:visited, .post-content a:active, .post-content a:hover {
+    text-decoration: none !important;
+    color: var(--text) !important; /* Paksa tetap hitam/putih */
 }
 
-.lang-label { 
-    min-width: 50px; 
-    color: var(--gray); 
-    font-size: 13px; 
-    margin-top: 5px; 
-}
-
-.post-content a {
-    text-decoration: none;
-    color: inherit; /* Judul artikel mengikuti warna tema */
-}
-
-.post-content h2 { 
-    font-size: 19px; 
-    font-weight: 500; 
-    margin-bottom: 4px; 
-    text-align: left !important; 
-}
-
-.post-item:hover h2 {
-    color: var(--accent); /* Interaksi saat di-hover */
-}
-
-.post-meta { 
-    font-size: 14px; 
-    color: var(--gray); 
-}
-
-.cat-link {
-    cursor: pointer;
-    color: var(--accent); /* Tag tetap berwarna agar menonjol */
-    font-weight: 500;
-}
-
-.cat-link:hover { 
-    text-decoration: underline; 
-}
-
-/* --- Tag Header ala Saugi --- */
-#tag-header {
-    display: none;
-    margin-bottom: 35px;
-    text-align: left;
-}
-
-#tag-header h1 {
-    text-align: left !important; /* Judul Tag: NamaTag di kiri */
-    margin: 0;
-    font-size: 32px;
-}
-
-.back-link-tag {
-    display: inline-block;
-    color: var(--gray);
-    text-decoration: none;
-    font-size: 14px;
-    margin-bottom: 15px;
-    cursor: pointer;
-}
-
-/* --- Content Styling --- */
+/* --- Isi Konten (Rata Kanan Kiri & Space HP) --- */
 .bio p, .content-body p {
     text-align: justify !important;
     text-justify: inter-word !important;
-    margin-bottom: 20px;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    margin-bottom: 25px; 
+    line-height: 1.8;
 }
 
+/* Bold untuk nama di dalam paragraf bio */
+.bio p strong, .content-body p strong {
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* --- Tombol Kembali (Biar Gak Jelek & Biru) --- */
+.back-link {
+    display: inline-block;
+    text-decoration: none !important; /* Hapus garis bawah jelek */
+    color: var(--gray) !important; /* Warna abu-abu bersih, bukan biru */
+    font-size: 14px;
+    margin-bottom: 35px;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: var(--accent) !important;
+    text-decoration: underline !important;
+}
+
+/* --- Category Tag (Jarak ke Teks) --- */
 .category-tag {
     display: inline-block;
-    background-color: var(--border); 
-    color: var(--text);
-    padding: 4px 12px;
+    background-color: var(--border) !important;
+    color: var(--text) !important;
+    padding: 6px 14px;
     border-radius: 6px;
     font-size: 13px;
     font-weight: 500;
+    margin-bottom: 45px; /* Jarak agar tidak menempel ke tulisan */
 }
 
 /* --- Footer --- */
 footer { 
     margin-top: 80px; 
-    padding-top: 20px; 
+    padding: 20px 0; 
     border-top: 1px solid var(--border); 
     font-size: 13px; 
     color: var(--gray); 

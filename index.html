@@ -54,13 +54,22 @@
         const menu = document.getElementById('menu');
         const themeToggle = document.getElementById('theme-toggle');
 
-        // Logika Buka-Tutup Menu
-        hamburger.addEventListener('click', () => {
+        // 1. Logika Buka-Tutup Menu (Fix untuk HP)
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation(); // Mencegah klik 'tembus' ke latar belakang agar menu tidak langsung tutup
             menu.classList.toggle('active');
             hamburger.innerHTML = menu.classList.contains('active') ? '✕' : '☰';
         });
 
-        // Logika Mode Gelap
+        // 2. Menutup menu jika klik di mana saja di luar area menu
+        document.addEventListener('click', (e) => {
+            if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+                menu.classList.remove('active');
+                hamburger.innerHTML = '☰';
+            }
+        });
+
+        // 3. Logika Mode Gelap
         themeToggle.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             if (currentTheme === 'dark') {
@@ -74,7 +83,7 @@
             }
         });
 
-        // Memuat tema yang tersimpan
+        // 4. Memuat tema yang tersimpan
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');

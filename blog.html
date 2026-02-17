@@ -7,26 +7,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        .post-item.hidden { display: none; }
+        /* Perbaikan Filter */
+        .post-item.hidden { display: none !important; }
         
+        /* Tombol Back ala Saugi */
         #tag-header {
             display: none;
             margin-bottom: 35px;
+            text-align: left;
         }
+
+        .back-link-tag {
+            display: inline-block;
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 15px;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .back-link-tag:hover { color: var(--accent); }
 
         #tag-header h1 {
             text-align: left !important;
             margin: 0;
             font-size: 32px;
-        }
-
-        .back-link-tag {
-            color: var(--accent);
-            text-decoration: underline;
-            font-size: 14px;
-            cursor: pointer;
-            display: inline-block;
-            margin-bottom: 10px;
+            font-weight: 700;
         }
 
         .cat-link {
@@ -112,17 +119,21 @@
         const menu = document.getElementById('menu');
         const themeToggle = document.getElementById('theme-toggle');
 
+        // PERBAIKAN LOGIKA FILTER
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('cat-link')) {
                 const targetCategory = e.target.innerText.trim();
+                
                 posts.forEach(post => {
                     const categories = post.getAttribute('data-category').split(' ');
+                    // Sembunyikan postingan yang tidak punya tag tersebut
                     if (categories.includes(targetCategory)) {
                         post.classList.remove('hidden');
                     } else {
                         post.classList.add('hidden');
                     }
                 });
+
                 mainHeader.style.display = 'none';
                 tagHeader.style.display = 'block';
                 tagTitle.innerText = `Tag: ${targetCategory}`;
@@ -136,6 +147,7 @@
             mainHeader.style.display = 'block';
         });
 
+        // Navigasi & Tema Tetap Aman
         hamburger.addEventListener('click', (e) => {
             e.stopPropagation();
             menu.classList.toggle('active');

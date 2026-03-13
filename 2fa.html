@@ -13,7 +13,6 @@
         input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
         .btn-save { width: 100%; padding: 12px; background: #000; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
         
-        /* Bulk & Clear Actions */
         .bulk-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 0 5px; }
         .btn-clear-all { color: var(--red); background: none; border: 1px solid var(--red); padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; }
         .btn-del-selected { background: var(--red); color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; display: none; }
@@ -26,7 +25,8 @@
         .otp-val { font-family: monospace; font-size: 32px; font-weight: bold; color: var(--blue); letter-spacing: 2px; }
         .btn-copy { background: var(--blue); color: white; border: none; padding: 7px 12px; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: bold; }
         
-        .meta { font-size: 12px; color: var(--gray); }
+        .meta { font-size: 12px; color: var(--gray); line-height: 1.6; }
+        .secret-display { color: #555; font-family: monospace; background: #f1f1f1; padding: 2px 5px; border-radius: 4px; word-break: break-all; display: block; margin: 5px 0; }
         .edit-box { margin-top: 15px; display: none; border-top: 1px dashed #eee; padding-top: 10px; }
         .btn-act { background: none; border: none; color: var(--blue); cursor: pointer; font-size: 11px; text-decoration: underline; margin-right: 10px; padding: 0; }
         
@@ -51,7 +51,7 @@
         </label>
         <div>
             <button class="btn-del-selected" id="btnDelSelected" onclick="deleteSelected()">Hapus Terpilih (<span id="countDel">0</span>)</button>
-            <button class="btn-clear-all" onclick="clearAll()">Clear All Data</button>
+            <button class="btn-clear-all" onclick="clearAll()">Clear All</button>
         </div>
     </div>
 
@@ -59,7 +59,7 @@
 </div>
 
 <script>
-    let accounts = JSON.parse(localStorage.getItem('yupi_auth_v3') || '[]');
+    let accounts = JSON.parse(localStorage.getItem('yupi_auth_v4') || '[]');
 
     function saveAccount() {
         const name = document.getElementById('accName').value;
@@ -67,7 +67,7 @@
         const backup = document.getElementById('accBackup').value;
         if (name && key) {
             accounts.push({ name, key, backup });
-            localStorage.setItem('yupi_auth_v3', JSON.stringify(accounts));
+            localStorage.setItem('yupi_auth_v4', JSON.stringify(accounts));
             location.reload();
         }
     }
@@ -86,17 +86,17 @@
     }
 
     function deleteSelected() {
-        if(confirm(`Hapus ${document.querySelectorAll('.acc-check:checked').length} akun terpilih?`)) {
+        if(confirm(`Hapus ${document.querySelectorAll('.acc-check:checked').length} akun?`)) {
             const checks = document.querySelectorAll('.acc-check');
             accounts = accounts.filter((_, i) => !checks[i].checked);
-            localStorage.setItem('yupi_auth_v3', JSON.stringify(accounts));
+            localStorage.setItem('yupi_auth_v4', JSON.stringify(accounts));
             location.reload();
         }
     }
 
     function clearAll() {
-        if(confirm("PERINGATAN: Hapus SELURUH data akun di browser ini secara permanen?")) {
-            localStorage.removeItem('yupi_auth_v3');
+        if(confirm("Hapus seluruh data?")) {
+            localStorage.removeItem('yupi_auth_v4');
             location.reload();
         }
     }
@@ -116,6 +116,7 @@
                     </div>
                     <div class="content-area">
                         <strong>${acc.name}</strong>
+                        <span class="meta" style="display:block; margin-top:3px;">Key: <code class="secret-display">${acc.key}</code></span>
                         <div class="otp-row">
                             <div class="otp-val" id="otp-${i}">------</div>
                             <button class="btn-copy" id="copy-btn-${i}" onclick="copyToClipboard(${i})">COPY</button>
@@ -159,7 +160,7 @@
 
     function saveBackup(i, val) {
         accounts[i].backup = val;
-        localStorage.setItem('yupi_auth_v3', JSON.stringify(accounts));
+        localStorage.setItem('yupi_auth_v4', JSON.stringify(accounts));
     }
 
     render();

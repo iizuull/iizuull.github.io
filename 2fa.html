@@ -3,26 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2FA Authenticator</title>
+    <title>2FA Authenticator Pro - Full Features</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/otpauth/9.1.2/otpauth.umd.min.js"></script>
     <style>
-        :root { --blue: #007bff; --bg: #f8f9fa; --border: #e9ecef; --gray: #888; }
+        :root { --blue: #007bff; --bg: #f8f9fa; --border: #e9ecef; --gray: #888; --red: #dc3545; }
         body { font-family: -apple-system, sans-serif; background: #fff; display: flex; justify-content: center; padding: 20px; }
         .wrapper { width: 100%; max-width: 450px; }
         .card-add { background: var(--bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 25px; }
         input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
         .btn-save { width: 100%; padding: 12px; background: #000; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .acc-item { padding: 15px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 15px; background: #fff; }
         
-        .otp-row { display: flex; align-items: center; justify-content: space-between; margin: 10px 0; }
-        .otp-val { font-family: monospace; font-size: 34px; font-weight: bold; color: var(--blue); letter-spacing: 2px; }
-        
-        .btn-copy { background: var(--blue); color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; }
-        .btn-copy:active { opacity: 0.7; }
+        /* Bulk & Clear Actions */
+        .bulk-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 0 5px; }
+        .btn-clear-all { color: var(--red); background: none; border: 1px solid var(--red); padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; }
+        .btn-del-selected { background: var(--red); color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; display: none; }
 
+        .acc-item { padding: 15px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 15px; background: #fff; display: flex; gap: 12px; }
+        .checkbox-area { padding-top: 2px; }
+        .content-area { flex-grow: 1; }
+        
+        .otp-row { display: flex; align-items: center; justify-content: space-between; margin: 8px 0; }
+        .otp-val { font-family: monospace; font-size: 32px; font-weight: bold; color: var(--blue); letter-spacing: 2px; }
+        .btn-copy { background: var(--blue); color: white; border: none; padding: 7px 12px; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: bold; }
+        
         .meta { font-size: 12px; color: var(--gray); }
         .edit-box { margin-top: 15px; display: none; border-top: 1px dashed #eee; padding-top: 10px; }
         .btn-act { background: none; border: none; color: var(--blue); cursor: pointer; font-size: 11px; text-decoration: underline; margin-right: 10px; padding: 0; }
+        
+        input[type="checkbox"] { transform: scale(1.2); cursor: pointer; }
     </style>
 </head>
 <body>
@@ -31,51 +39,94 @@
     <h2 style="font-size: 20px; border-bottom: 2px solid #eee; padding-bottom: 8px;">My 2FA Authenticator</h2>
     
     <div class="card-add">
-        <input type="text" id="accName" placeholder="Name Account" autocomplete="off" spellcheck="false">
+        <input type="text" id="accName" placeholder="Nama Akun" autocomplete="off" spellcheck="false">
         <input type="text" id="accKey" placeholder="Secret Key" autocomplete="off" spellcheck="false">
         <textarea id="accBackup" placeholder="Backup Codes (Opsional)" autocomplete="off" spellcheck="false"></textarea>
         <button class="btn-save" onclick="saveAccount()">SIMPAN AKUN</button>
+    </div>
+
+    <div class="bulk-bar" id="bulkBar">
+        <label style="font-size: 13px; color: var(--gray); cursor: pointer;">
+            <input type="checkbox" id="selectAll" onclick="toggleSelectAll()"> Pilih Semua
+        </label>
+        <div>
+            <button class="btn-del-selected" id="btnDelSelected" onclick="deleteSelected()">Hapus Terpilih (<span id="countDel">0</span>)</button>
+            <button class="btn-clear-all" onclick="clearAll()">Clear All Data</button>
+        </div>
     </div>
 
     <div id="displayList"></div>
 </div>
 
 <script>
-    let accounts = JSON.parse(localStorage.getItem('yupi_final_auth_v2') || '[]');
+    let accounts = JSON.parse(localStorage.getItem('yupi_auth_v3') || '[]');
 
     function saveAccount() {
         const name = document.getElementById('accName').value;
         const key = document.getElementById('accKey').value.replace(/\s/g, '').toUpperCase();
         const backup = document.getElementById('accBackup').value;
-
         if (name && key) {
             accounts.push({ name, key, backup });
-            localStorage.setItem('yupi_final_auth_v2', JSON.stringify(accounts));
+            localStorage.setItem('yupi_auth_v3', JSON.stringify(accounts));
             location.reload();
-        } else {
-            alert("Nama dan Key wajib diisi!");
+        }
+    }
+
+    function toggleSelectAll() {
+        const isChecked = document.getElementById('selectAll').checked;
+        document.querySelectorAll('.acc-check').forEach(c => c.checked = isChecked);
+        updateUI();
+    }
+
+    function updateUI() {
+        const selected = document.querySelectorAll('.acc-check:checked').length;
+        const btn = document.getElementById('btnDelSelected');
+        document.getElementById('countDel').innerText = selected;
+        btn.style.display = selected > 0 ? 'inline-block' : 'none';
+    }
+
+    function deleteSelected() {
+        if(confirm(`Hapus ${document.querySelectorAll('.acc-check:checked').length} akun terpilih?`)) {
+            const checks = document.querySelectorAll('.acc-check');
+            accounts = accounts.filter((_, i) => !checks[i].checked);
+            localStorage.setItem('yupi_auth_v3', JSON.stringify(accounts));
+            location.reload();
+        }
+    }
+
+    function clearAll() {
+        if(confirm("PERINGATAN: Hapus SELURUH data akun di browser ini secara permanen?")) {
+            localStorage.removeItem('yupi_auth_v3');
+            location.reload();
         }
     }
 
     function render() {
         const div = document.getElementById('displayList');
         div.innerHTML = '';
+        if (accounts.length === 0) {
+            document.getElementById('bulkBar').style.display = 'none';
+            return;
+        }
         accounts.forEach((acc, i) => {
             div.innerHTML += `
                 <div class="acc-item">
-                    <strong>${acc.name}</strong>
-                    <div class="otp-row">
-                        <div class="otp-val" id="otp-${i}">------</div>
-                        <button class="btn-copy" id="copy-btn-${i}" onclick="copyToClipboard(${i})">COPY</button>
+                    <div class="checkbox-area">
+                        <input type="checkbox" class="acc-check" onclick="updateUI()">
                     </div>
-                    <div class="meta">
-                        <span id="timer-${i}">30s</span> ◦ 
-                        <button class="btn-act" onclick="toggleEdit(${i})">Edit Backup</button> ◦ 
-                        <button class="btn-act" style="color:red" onclick="deleteAcc(${i})">Hapus</button>
-                    </div>
-                    <div id="ed-${i}" class="edit-box">
-                        <textarea oninput="saveBackup(${i}, this.value)" style="height:80px; font-family:monospace;">${acc.backup || ''}</textarea>
-                        <div style="font-size:10px; color:green">✓ Tersimpan otomatis</div>
+                    <div class="content-area">
+                        <strong>${acc.name}</strong>
+                        <div class="otp-row">
+                            <div class="otp-val" id="otp-${i}">------</div>
+                            <button class="btn-copy" id="copy-btn-${i}" onclick="copyToClipboard(${i})">COPY</button>
+                        </div>
+                        <div class="meta">
+                            <span id="timer-${i}">30s</span> ◦ 
+                            <button class="btn-act" onclick="toggleEdit(${i})">Edit Backup</button>
+                        </div>
+                        <div id="ed-${i}" class="edit-box">
+                            <textarea oninput="saveBackup(${i}, this.value)" style="height:80px">${acc.backup || ''}</textarea>
+                        </div>
                     </div>
                 </div>
             `;
@@ -85,39 +136,20 @@
     function updateCodes() {
         accounts.forEach((acc, i) => {
             try {
-                let totp = new OTPAuth.TOTP({
-                    secret: acc.key,
-                    digits: 6,
-                    period: 30
-                });
-                
+                let totp = new OTPAuth.TOTP({ secret: acc.key });
                 let code = totp.generate();
                 let seconds = 30 - (Math.floor(Date.now() / 1000) % 30);
-                
-                const otpEl = document.getElementById('otp-' + i);
-                const timerEl = document.getElementById('timer-' + i);
-                if (otpEl) otpEl.innerText = code;
-                if (timerEl) timerEl.innerText = seconds + "s";
-            } catch (e) {
-                const otpEl = document.getElementById('otp-' + i);
-                if (otpEl) otpEl.innerText = "INVALID";
-            }
+                document.getElementById('otp-' + i).innerText = code;
+                document.getElementById('timer-' + i).innerText = seconds + "s";
+            } catch (e) { document.getElementById('otp-' + i).innerText = "INVALID"; }
         });
     }
 
     function copyToClipboard(i) {
-        const code = document.getElementById('otp-' + i).innerText;
-        navigator.clipboard.writeText(code);
-        
+        navigator.clipboard.writeText(document.getElementById('otp-' + i).innerText);
         const btn = document.getElementById('copy-btn-' + i);
-        const originalText = btn.innerText;
         btn.innerText = 'COPIED!';
-        btn.style.background = 'green';
-        
-        setTimeout(() => {
-            btn.innerText = originalText;
-            btn.style.background = '#007bff';
-        }, 1000);
+        setTimeout(() => { btn.innerText = 'COPY'; }, 1000);
     }
 
     function toggleEdit(i) {
@@ -127,15 +159,7 @@
 
     function saveBackup(i, val) {
         accounts[i].backup = val;
-        localStorage.setItem('yupi_final_auth_v2', JSON.stringify(accounts));
-    }
-
-    function deleteAcc(i) {
-        if(confirm("Hapus akun ini?")) {
-            accounts.splice(i, 1);
-            localStorage.setItem('yupi_final_auth_v2', JSON.stringify(accounts));
-            location.reload();
-        }
+        localStorage.setItem('yupi_auth_v3', JSON.stringify(accounts));
     }
 
     render();

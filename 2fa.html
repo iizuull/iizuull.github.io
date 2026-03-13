@@ -13,7 +13,13 @@
         input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
         .btn-save { width: 100%; padding: 12px; background: #000; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
         .acc-item { padding: 15px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 15px; background: #fff; }
-        .otp-val { font-family: monospace; font-size: 36px; font-weight: bold; color: var(--blue); letter-spacing: 2px; margin: 5px 0; }
+        
+        .otp-row { display: flex; align-items: center; justify-content: space-between; margin: 10px 0; }
+        .otp-val { font-family: monospace; font-size: 34px; font-weight: bold; color: var(--blue); letter-spacing: 2px; }
+        
+        .btn-copy { background: var(--blue); color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; }
+        .btn-copy:active { opacity: 0.7; }
+
         .meta { font-size: 12px; color: var(--gray); }
         .edit-box { margin-top: 15px; display: none; border-top: 1px dashed #eee; padding-top: 10px; }
         .btn-act { background: none; border: none; color: var(--blue); cursor: pointer; font-size: 11px; text-decoration: underline; margin-right: 10px; padding: 0; }
@@ -27,7 +33,7 @@
     <div class="card-add">
         <input type="text" id="accName" placeholder="Nama Akun">
         <input type="text" id="accKey" placeholder="Secret Key (Paste dari Google)">
-        <textarea id="accBackup" placeholder="Backup Codes (Simpan di sini)"></textarea>
+        <textarea id="accBackup" placeholder="Backup Codes (Opsional)"></textarea>
         <button class="btn-save" onclick="saveAccount()">SIMPAN AKUN</button>
     </div>
 
@@ -35,7 +41,7 @@
 </div>
 
 <script>
-    let accounts = JSON.parse(localStorage.getItem('yupi_final_auth_v1') || '[]');
+    let accounts = JSON.parse(localStorage.getItem('yupi_final_auth_v2') || '[]');
 
     function saveAccount() {
         const name = document.getElementById('accName').value;
@@ -44,7 +50,7 @@
 
         if (name && key) {
             accounts.push({ name, key, backup });
-            localStorage.setItem('yupi_final_auth_v1', JSON.stringify(accounts));
+            localStorage.setItem('yupi_final_auth_v2', JSON.stringify(accounts));
             location.reload();
         } else {
             alert("Nama dan Key wajib diisi!");
@@ -58,14 +64,18 @@
             div.innerHTML += `
                 <div class="acc-item">
                     <strong>${acc.name}</strong>
-                    <div class="otp-val" id="otp-${i}">------</div>
+                    <div class="otp-row">
+                        <div class="otp-val" id="otp-${i}">------</div>
+                        <button class="btn-copy" id="copy-btn-${i}" onclick="copyToClipboard(${i})">COPY</button>
+                    </div>
                     <div class="meta">
                         <span id="timer-${i}">30s</span> ◦ 
                         <button class="btn-act" onclick="toggleEdit(${i})">Edit Backup</button> ◦ 
                         <button class="btn-act" style="color:red" onclick="deleteAcc(${i})">Hapus</button>
                     </div>
                     <div id="ed-${i}" class="edit-box">
-                        <textarea oninput="saveBackup(${i}, this.value)" style="height:80px">${acc.backup || ''}</textarea>
+                        <textarea oninput="saveBackup(${i}, this.value)" style="height:80px; font-family:monospace;">${acc.backup || ''}</textarea>
+                        <div style="font-size:10px; color:green">✓ Tersimpan otomatis</div>
                     </div>
                 </div>
             `;
@@ -75,7 +85,6 @@
     function updateCodes() {
         accounts.forEach((acc, i) => {
             try {
-                // Menggunakan library OTPAuth (Sama seperti 2fa.live)
                 let totp = new OTPAuth.TOTP({
                     secret: acc.key,
                     digits: 6,
@@ -85,12 +94,30 @@
                 let code = totp.generate();
                 let seconds = 30 - (Math.floor(Date.now() / 1000) % 30);
                 
-                document.getElementById('otp-' + i).innerText = code;
-                document.getElementById('timer-' + i).innerText = seconds + "s";
+                const otpEl = document.getElementById('otp-' + i);
+                const timerEl = document.getElementById('timer-' + i);
+                if (otpEl) otpEl.innerText = code;
+                if (timerEl) timerEl.innerText = seconds + "s";
             } catch (e) {
-                document.getElementById('otp-' + i).innerText = "INVALID";
+                const otpEl = document.getElementById('otp-' + i);
+                if (otpEl) otpEl.innerText = "INVALID";
             }
         });
+    }
+
+    function copyToClipboard(i) {
+        const code = document.getElementById('otp-' + i).innerText;
+        navigator.clipboard.writeText(code);
+        
+        const btn = document.getElementById('copy-btn-' + i);
+        const originalText = btn.innerText;
+        btn.innerText = 'COPIED!';
+        btn.style.background = 'green';
+        
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.style.background = '#007bff';
+        }, 1000);
     }
 
     function toggleEdit(i) {
@@ -100,13 +127,13 @@
 
     function saveBackup(i, val) {
         accounts[i].backup = val;
-        localStorage.setItem('yupi_final_auth_v1', JSON.stringify(accounts));
+        localStorage.setItem('yupi_final_auth_v2', JSON.stringify(accounts));
     }
 
     function deleteAcc(i) {
         if(confirm("Hapus akun ini?")) {
             accounts.splice(i, 1);
-            localStorage.setItem('yupi_final_auth_v1', JSON.stringify(accounts));
+            localStorage.setItem('yupi_final_auth_v2', JSON.stringify(accounts));
             location.reload();
         }
     }

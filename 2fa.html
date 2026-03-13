@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2FA Authenticator Pro</title>
+    <title>2FA Authenticator</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/otpauth/9.1.2/otpauth.umd.min.js"></script>
     <style>
         :root { --blue: #007bff; --bg: #f8f9fa; --border: #e9ecef; --gray: #888; }
@@ -31,9 +31,9 @@
     <h2 style="font-size: 20px; border-bottom: 2px solid #eee; padding-bottom: 8px;">My 2FA Authenticator</h2>
     
     <div class="card-add">
-        <input type="text" id="accName" placeholder="Nama Akun">
-        <input type="text" id="accKey" placeholder="Secret Key (Paste dari Google)">
-        <textarea id="accBackup" placeholder="Backup Codes (Opsional)"></textarea>
+        <input type="text" id="accName" placeholder="Nama Akun" autocomplete="off" spellcheck="false">
+        <input type="text" id="accKey" placeholder="Secret Key (Paste dari Google)" autocomplete="off" spellcheck="false">
+        <textarea id="accBackup" placeholder="Backup Codes (Opsional)" autocomplete="off" spellcheck="false"></textarea>
         <button class="btn-save" onclick="saveAccount()">SIMPAN AKUN</button>
     </div>
 

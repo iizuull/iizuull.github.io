@@ -3,10 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad Zulpiqor</title>
+    <title>Hello — Space</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- Efek Modern & Animasi --- */
+        
+        /* Animasi gelombang suara Spotify */
+        @keyframes soundBounce {
+            0% { height: 30%; }
+            100% { height: 100%; }
+        }
+        .spotify-link:hover {
+            color: #1DB954 !important;
+        }
+        .spotify-card {
+            display: flex; 
+            align-items: center; 
+            background: #181818; 
+            padding: 14px 18px; 
+            border-radius: 12px; 
+            color: #fff; 
+            max-width: 360px; 
+            margin: 25px 0 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .spotify-embed-container {
+            max-width: 360px;
+            margin-bottom: 30px;
+        }
+
+        /* Hover efek pada menu navigasi (Garis bawah halus) */
+        .menu li a {
+            position: relative;
+            text-decoration: none;
+            color: inherit;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        .menu li a:hover {
+            opacity: 1;
+        }
+        .menu li a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: currentColor;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+        .menu li a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Animasi berputar tipis pada tombol ganti tema */
+        #theme-toggle {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+        #theme-toggle:active {
+            transform: rotate(360deg);
+        }
+
+        @media (max-width: 768px) {
+            .spotify-card, .spotify-embed-container {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -19,24 +93,47 @@
                     <li><a href="blog.html">Blog</a></li>
                 </ul>
             </nav>
-            <h1>Ahmad Zulpiqor</h1>
+            <h1>/home</h1>
         </header>
 
         <main class="bio">
-            <p>
-                Halo! saya <span class="highlight">Ahmad Zulpiqor</span>, saat ini saya adalah mahasiswa Arkeologi di Universitas Gadjah Mada dengan minat pada <strong>Arkeologi Maritim dan Bawah Air</strong>. Saya memilih ini karena ketertarikan pada dunia penyelaman dan peninggalan budaya di bawah air.
-            </p>
-            <p>
-                Diluar aktivitas akademik, saya bekerja sebagai freelancer di <span class="highlight">G2G Global</span>, berfokus pada solusi teknis dan manajemen data digital.
-            </p>
-            <p>
-                Diwaktu luang, saya menikmati <i>solo traveling</i>, fotografi, dan membaca buku untuk mencari perspektif baru disetiap perjalanan. Website ini saya buat sebagai ruang belajar dan catatan perjalanan saya, baik dalam studi, pekerjaan, maupun rutinitas harian.
-            </p>
-            <p>
-                Tujuan utama dari ruang ini bukan untuk terlihat sempurna, melainkan untuk membangun konsistensi, memperjelas cara berpikir, dan merekam perjalanan saya dari waktu ke waktu.
+            <p style="font-size: 17px; margin-bottom: 5px; opacity: 0.9;">
+                Currently tuning into my space.
             </p>
 
-            <div class="social-links" style="margin-top: 50px; display: flex; justify-content: center; gap: 30px; font-size: 26px; width: 100%;">
+            <div class="spotify-card">
+                <div class="spotify-icon" style="margin-right: 16px; display: flex; align-items: center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#1DB954" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.669 11.538a.498.498 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686zm.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858zm.084-2.269C10.192 5.56 5.868 5.419 3.386 6.175a.75.75 0 1 1-.433-1.436c2.884-.875 7.663-.711 10.742 1.118a.75.75 0 0 1-.26 1.343z"/>
+                    </svg>
+                </div>
+                <div class="spotify-info" style="flex-grow: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                    <div style="font-size: 10px; color: #b3b3b3; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px; font-weight: 600;">Current Favorite</div>
+                    <a href="http://googleusercontent.com/spotify.com/9" target="_blank" class="spotify-link" style="text-decoration: none; color: #fff; font-size: 15px; font-weight: 500; display: block; overflow: hidden; text-overflow: ellipsis; transition: color 0.2s;">
+                        Open Playlist on Spotify
+                    </a>
+                    <div style="font-size: 12px; color: #b3b3b3; overflow: hidden; text-overflow: ellipsis; margin-top: 1px;">Curated Tracks</div>
+                </div>
+                <div class="sound-wave" style="display: flex; align-items: flex-end; height: 16px; gap: 3px; margin-left: 10px;">
+                    <span style="width: 3px; height: 100%; background: #1DB954; animation: soundBounce 0.8s ease-in-out infinite alternate;"></span>
+                    <span style="width: 3px; height: 60%; background: #1DB954; animation: soundBounce 0.8s ease-in-out infinite alternate 0.2s;"></span>
+                    <span style="width: 3px; height: 80%; background: #1DB954; animation: soundBounce 0.8s ease-in-out infinite alternate 0.4s;"></span>
+                </div>
+            </div>
+
+            <div class="spotify-embed-container">
+                <iframe style="border-radius:12px" 
+                    src="https://open.spotify.com/embed/playlist/0" 
+                    width="100%" 
+                    height="152" 
+                    frameBorder="0" 
+                    allowfullscreen="" 
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy">
+                </iframe>
+            </div>
+
+            <div class="social-links" style="margin-top: 40px; display: flex; justify-content: center; gap: 30px; font-size: 26px; width: 100%;">
                 <a href="mailto:ahmadzulpiqor@mail.ugm.ac.id" title="Email" style="text-decoration: none; color: inherit; transition: opacity 0.3s;">
                     <i class="fa-regular fa-envelope"></i>
                 </a>
@@ -47,10 +144,15 @@
                    <i class="fa-brands fa-instagram"></i>
                 </a>
             </div>
+
+            <div style="text-align: center; margin-top: 40px; font-family: monospace; font-size: 11px; opacity: 0.3; letter-spacing: 0.5px; line-height: 1.8;">
+                <div>// magna diis curae, parva neglegunt.</div>
+                <div>pgp: <a href="#" style="color: inherit; text-decoration: underline;">0x7B2F...4A</a></div>
+            </div>
         </main>
 
-        <footer style="text-align: center; margin-top: 80px; padding-bottom: 30px; opacity: 0.7; font-size: 13px;">
-            © 2026 Ahmad Zulpiqor. Built with simplicity.
+        <footer style="text-align: center; margin-top: 60px; padding-bottom: 30px; opacity: 0.7; font-size: 13px;">
+            © 2026. Built with simplicity.
         </footer>
     </div>
 

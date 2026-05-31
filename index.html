@@ -14,7 +14,7 @@
         .spotify-card {
             display: flex; align-items: center; gap: 15px;
             background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 16px 20px; border-radius: 12px; margin: 30px auto 40px auto;
+            padding: 16px 20px; border-radius: 12px; margin: 30px auto 35px auto;
             text-decoration: none; color: inherit; transition: all 0.3s ease;
         }
         .spotify-card:hover { border-color: #1DB954; background: rgba(255, 255, 255, 0.06); transform: translateY(-2px); }
@@ -22,9 +22,19 @@
         .spotify-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
         .spotify-desc { font-size: 12px; opacity: 0.5; }
 
+        /* Tulisan 'hi' yang dibuat sengaja agak aneh/misterius */
+        .weird-hi {
+            font-family: monospace;
+            font-size: 14px;
+            opacity: 0.4;
+            letter-spacing: 2px;
+            margin: 35px 0;
+            user-select: none;
+        }
+
         /* Blog Section */
         .blog-section { 
-            margin-top: 40px; 
+            margin-top: 20px; 
             text-align: left; 
             border-top: 1px dashed rgba(255, 255, 255, 0.1); 
             padding-top: 35px;
@@ -33,9 +43,9 @@
         #latest-posts-container { min-height: 50px; }
         .loading-text { font-size: 13px; opacity: 0.5; font-family: monospace; }
 
-        /* Pengaturan Ukuran Font Judul Blog yang Baru (Diperkecil) */
+        /* Pengaturan Ukuran Font Judul Blog (Diperkecil) */
         #latest-posts-container .post-item h2 {
-            font-size: 15px !important; /* Ukuran font diperkecil secara paksa */
+            font-size: 15px !important;
             font-weight: 500;
             line-height: 1.4;
         }
@@ -85,6 +95,8 @@
                     <div class="spotify-desc">Tuning into my current space</div>
                 </div>
             </a>
+
+            <div class="weird-hi">hi</div>
 
             <div class="blog-section">
                 <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.4; margin-bottom: 25px;">Latest Writing</div>

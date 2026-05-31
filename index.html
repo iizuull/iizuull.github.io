@@ -19,11 +19,28 @@
         }
         .spotify-card:hover { border-color: rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.06); transform: translateY(-2px); }
         
+        /* EFEK VINYL BERPUTAR OTOMATIS TANPA HENTI */
         .artist-avatar {
-            width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
-            border: 1px solid rgba(255, 255, 255, 0.2); transition: transform 1s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            /* Menjalankan animasi bernama 'spin' selama 8 detik, berputar konstan, dan terus-menerus */
+            animation: spin 8s linear infinite; 
+            transition: animation-duration 0.5s ease;
         }
-        .spotify-card:hover .artist-avatar { transform: rotate(360deg); }
+        
+        /* Pas di-hover kursor, putaran vinyl jadi sedikit lebih cepat (opsional, biar interaktif) */
+        .spotify-card:hover .artist-avatar {
+            animation-duration: 4s; 
+        }
+
+        /* Logika gerakan memutar 360 derajat */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
 
         .spotify-text { text-align: left; }
         .spotify-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
@@ -69,8 +86,10 @@
         </header>
 
         <main class="bio main-content">
+            <!-- Tautan Playlist dengan Gambar Vinyl yang Muter Terus -->
             <a href="https://open.spotify.com/playlist/76nf12e17VbgguAfeCb19w?si=20mcKfnQRqqW44mqX5-LmQ&pi=CcNlAfu3RVqSM" target="_blank" class="spotify-card">
-                <img class="artist-avatar" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150" alt="Artist">
+                <!-- Taruh file atau link gambar piringan hitam / vinyl kamu di src bawah ini -->
+                <img class="artist-avatar" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150" alt="Vinyl Art">
                 <div class="spotify-text">
                     <div class="spotify-title">On Repeat</div>
                     <div class="spotify-desc">Tap to open playlist</div>
@@ -98,7 +117,6 @@
             </div>
         </main>
 
-        <!-- Footer sejati di bagian paling bawah -->
         <footer style="text-align: center; padding: 20px 0; opacity: 0.6; font-size: 12px; letter-spacing: 0.5px;">
             © 2026 Ahmad Zulpiqor. Built with simplicity.
         </footer>

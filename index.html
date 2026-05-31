@@ -10,7 +10,7 @@
     <style>
         .main-content { max-width: 450px; margin: 0 auto; text-align: center; }
         
-        /* Spotify Card yang Lebih Menarik */
+        /* Spotify Card Modern */
         .spotify-card {
             display: flex; align-items: center; gap: 15px;
             background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
@@ -24,10 +24,12 @@
 
         /* Blog Section */
         .blog-section { margin-top: 50px; text-align: left; }
-        .post-item { display: flex; align-items: flex-start; margin-bottom: 20px; }
-        .lang-label { min-width: 40px; color: var(--gray); font-size: 12px; margin-top: 5px; font-family: monospace; }
-        .post-title { font-size: 16px; font-weight: 500; margin: 0; color: inherit; }
-        .post-meta { font-size: 12px; color: var(--gray); margin-top: 4px; }
+        
+        /* Tempat penampungan artikel otomatis */
+        #latest-posts-container { min-height: 50px; }
+        
+        /* Kerangka animasi loading halus */
+        .loading-text { font-size: 13px; opacity: 0.5; font-family: monospace; }
     </style>
 </head>
 <body>
@@ -44,7 +46,7 @@
         </header>
 
         <main class="bio main-content">
-            <!-- Spotify Card yang Lebih Menarik -->
+            <!-- Spotify Card -->
             <a href="https://open.spotify.com/playlist/76nf12e17VbgguAfeCb19w?si=20mcKfnQRqqW44mqX5-LmQ&pi=CcNlAfu3RVqSM" target="_blank" class="spotify-card">
                 <i class="fa-brands fa-spotify" style="font-size: 28px; color: #1DB954;"></i>
                 <div class="spotify-text">
@@ -64,18 +66,13 @@
             <div class="blog-section">
                 <div style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; opacity: 0.5; margin-bottom: 20px;">Latest Writing</div>
                 
-                <div class="post-item">
-                    <div class="lang-label">ID</div>
-                    <div>
-                        <a href="posts/first-24h-detoks.html" style="text-decoration: none; color: inherit;">
-                            <h2 class="post-title">First 24 Hours Social Media Detoks</h2>
-                        </a>
-                        <div class="post-meta">Feb 20, 2026 — Productivity ◦ Focus</div>
-                    </div>
+                <!-- JS akan otomatis memasukkan 2 post-item ke dalam sini -->
+                <div id="latest-posts-container">
+                    <div class="loading-text">Fetching latest updates...</div>
                 </div>
             </div>
 
-            <!-- Bagian PGP yang Diperbesar -->
+            <!-- Bagian PGP Besar -->
             <div style="text-align: center; margin-top: 60px; font-family: monospace; font-size: 13px; opacity: 0.6; line-height: 1.8;">
                 <div>// magna diis curae, parva neglegunt.</div>
                 <div>pgp: <a href="#" style="color: inherit; text-decoration: underline; font-weight: 500;">0x7B2F...4A</a></div>
@@ -84,17 +81,62 @@
     </div>
 
     <script>
+        // 1. Script Navigasi Hambuger & Tema Bawaan
         const hamburger = document.getElementById('hamburger');
         const menu = document.getElementById('menu');
         const themeToggle = document.getElementById('theme-toggle');
-        hamburger.addEventListener('click', (e) => { menu.classList.toggle('active'); hamburger.innerHTML = menu.classList.contains('active') ? '✕' : '☰'; });
+        
+        hamburger.addEventListener('click', (e) => { 
+            menu.classList.toggle('active'); 
+            hamburger.innerHTML = menu.classList.contains('active') ? '✕' : '☰'; 
+        });
+        
         themeToggle.addEventListener('click', () => {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
             document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
             themeToggle.innerHTML = isDark ? '🌙' : '☀️';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
         });
+        
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); themeToggle.innerHTML = '☀️'; }
+        if (savedTheme === 'dark') { 
+            document.documentElement.setAttribute('data-theme', 'dark'); 
+            themeToggle.innerHTML = '☀️'; 
+        }
+
+        // 2. SISTEM OTOMATISASI: Mengambil 2 artikel terbaru dari blog.html
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('blog.html')
+                .then(response => {
+                    if (!response.ok) throw new Error('Network error');
+                    return response.text();
+                })
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    // Mengambil semua elemen .post-item yang ada di blog.html
+                    const allPosts = doc.querySelectorAll('.post-item');
+                    const container = document.getElementById('latest-posts-container');
+                    
+                    if (allPosts.length > 0) {
+                        container.innerHTML = ''; // Hapus teks loading
+                        
+                        // Melakukan perulangan untuk mengambil maksimal 2 postingan teratas
+                        const postsToShow = Math.min(allPosts.length, 2);
+                        for (let i = 0; i < postsToShow; i++) {
+                            container.innerHTML += allPosts[i].outerHTML;
+                        }
+                    } else {
+                        container.innerHTML = '<div class="loading-text">No posts found.</div>';
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    document.getElementById('latest-posts-container').innerHTML = 
+                        '<div class="loading-text">Failed to load latest writing.</div>';
+                });
+        });
     </script>
 </body>
 </html>
